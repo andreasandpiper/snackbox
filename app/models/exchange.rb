@@ -1,0 +1,3 @@
+class CareRecord < ApplicationRecord
+end
+  
