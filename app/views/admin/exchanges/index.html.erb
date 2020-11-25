@@ -14,6 +14,7 @@
 <table class="table is-fullwidth">
   <thead>
     <tr>
+        <th></th>
       <th>Name</th>
       <th>Start date</th>
       <th>End date</th>
@@ -25,9 +26,12 @@
   <tbody>
     <% @exchanges.each do |e| %>
         <tr>
+            <td>
+                <%= button_to "Edit", edit_admin_exchange_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
+            </td>
             <td><%= e.name %></td>
             <td><%= e.start_date.to_s(:long) %></td>
-            <td><%= e.end_date %></td>
+            <td><%= e.end_date.to_s(:long) %></td>
             <td><%= e.country %></td>
             <td><%= e.department %></td>
             <td><%= e.details %></td>

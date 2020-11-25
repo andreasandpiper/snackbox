@@ -10,9 +10,25 @@ module Admin
     end
 
     def create
-      exchange = Exchange.new params.permit(:name, :start_date, :end_date, :country, :details, :department)
+      exchange = Exchange.new exchange_params
       exchange.save
       redirect_to admin_exchanges_path
+    end
+
+    def edit
+      @exchange = Exchange.find params[:id]
+    end
+
+    def update
+      exchange = Exchange.find params[:id]
+      exchange.update! exchange_params
+      redirect_to admin_exchanges_path
+    end
+
+    private
+
+    def exchange_params
+      params.require(:exchange).permit(:name, :start_date, :end_date, :country, :details, :department)
     end
   end
 end
