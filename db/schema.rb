@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_25_213122) do
+ActiveRecord::Schema.define(version: 2020_11_26_041444) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2020_11_25_213122) do
     t.string "department", null: false
   end
 
-  create_table "participation", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+  create_table "participations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.boolean "shipped", default: false
     t.string "address_1"
     t.string "address_2"
@@ -34,14 +34,20 @@ ActiveRecord::Schema.define(version: 2020_11_25_213122) do
     t.string "zipcode"
     t.string "country"
     t.string "preferences"
-    t.uuid "users_id"
-    t.index ["users_id"], name: "index_participation_on_users_id"
+    t.string "team"
+    t.string "full_name"
+    t.uuid "match_participation_id"
+    t.uuid "user_id"
+    t.uuid "exchange_id"
+    t.index ["exchange_id"], name: "index_participations_on_exchange_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.string "full_name", null: false
     t.string "email", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
   end
 
-  add_foreign_key "participation", "users", column: "users_id"
+  add_foreign_key "participations", "exchanges"
+  add_foreign_key "participations", "users"
 end

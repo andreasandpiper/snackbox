@@ -4,5 +4,7 @@ class Exchange < ApplicationRecord
     validates :end_date, presence: true
     validates :country, presence: true
     validates :department, presence: true
+
+    has_many :participation
 end
   

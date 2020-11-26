@@ -1,4 +1,4 @@
-<%= form_with url: "/admin/exchanges", method: :post do |form| %>
+<%= form_with url: "/admin/exchanges", scope: :exchange, method: :post do |form| %>
     <div class="field">
       <%= form.label :name, "Exchange Name", { :class => "label"} %>
       <div class="control">

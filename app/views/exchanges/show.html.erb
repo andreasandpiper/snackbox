@@ -47,6 +47,6 @@
     <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
     <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
   <footer class="card-footer">
-    
+  <%= button_to "Sign Up", new_exchange_participation_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
   </footer>
 </div>

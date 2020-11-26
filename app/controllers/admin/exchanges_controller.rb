@@ -6,6 +6,10 @@ module Admin
       @exchanges = Exchange.all
     end
 
+    def new
+      @exchange = Exchange.new
+    end
+
     def create
       exchange = Exchange.new exchange_params
       exchange.save

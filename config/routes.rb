@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     resources :exchanges, only: [:index, :new, :create, :edit, :update]
   end
 
-  resources :exchanges, only: [:show]
+  resources :exchanges, only: [:show] do
+    resources :participations, only: [:new, :show, :edit, :create, :update]
+  end
 end

@@ -1,0 +1,69 @@
+<%= form_with(model: [@exchange, @participation], local: true) do |form| %>
+    <div class="field">
+      <%= form.label :full_name, "Full Name", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :full_name, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :email, "Work email (ex. yourname@teladochealth.com)", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :email, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :team, "Team", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :team, { :class => "input"} %>
+      </div>
+    </div>
+
+
+    <div class="field">
+      <%= form.label :address_1, "Address 1", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :address_1, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :address_2, "Address 2", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :address_2, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :city, "City", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :city, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :state, "State", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :state, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :zipcode, "Zipcode", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :zipcode, { :class => "input"} %>
+      </div>
+    </div>
+
+    <div class="field">
+      <%= form.label :preferences, "Preferences and Dietary ", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_area :preferences, { :class => "input"} %>
+      </div>
+    </div>
+
+    <%= form.submit "Submit Exchange", { :class => "button is-link is-light"} %>
+<% end %>
+
+  
