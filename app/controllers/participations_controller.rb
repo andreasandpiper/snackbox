@@ -7,9 +7,7 @@ class ParticipationsController < ApplicationController
 
     def create
         user = User.find_or_create_by user_params
-        byebug
         user.participation.create participation_params.merge(exchange__params)
-
         redirect_to exchange_path(params[:exchange_id])
     end
 

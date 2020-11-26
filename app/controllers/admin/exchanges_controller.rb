@@ -6,6 +6,11 @@ module Admin
       @exchanges = Exchange.all
     end
 
+    def show
+      @exchange = Exchange.find params[:id]
+      @participation = @exchange.participation.joins(:user)
+    end
+
     def new
       @exchange = Exchange.new
     end

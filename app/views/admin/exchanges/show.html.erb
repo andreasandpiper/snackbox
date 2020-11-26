@@ -1,0 +1,44 @@
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+    <h4 class="title is-4">Exchange: <span class="has-text-primary"><%= @exchange.name %></h4>
+    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
+    <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
+    <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
+    </div>
+    <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
+    <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
+    <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+<h4 class="title is-4">Participants</h4>
+<table class="table is-fullwidth is-striped">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Address</th>
+      <th>Team</th>
+      <th>Preferences</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @participation.each do |e| %>
+        <tr>
+            <td><%= e.full_name %></td>
+            <td>TODO email</td>
+            <td><%= e.address_1 %> <%= e.address_2 %>, <%= e.city %>, <%= e.state %> <%= e.zipcode %> </td>
+            <td><%= e.team %></td>
+            <td><%= e.preferences %></td>
+        </tr>
+    <% end %>
+  </tbody>
+  </table>
+</div>
+</div>
