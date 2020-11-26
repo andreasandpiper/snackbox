@@ -1,7 +1,7 @@
 
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
-    <h1 class="is-size-1 center">Admin</h1>
+    <h1 class="title is-1 center">Admin</h1>
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
@@ -11,7 +11,7 @@
     </div>
 </nav>
 
-<table class="table is-fullwidth">
+<table class="table is-fullwidth is-striped">
   <thead>
     <tr>
         <th></th>
@@ -28,6 +28,7 @@
         <tr>
             <td>
                 <%= button_to "Edit", edit_admin_exchange_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
+                <%= button_to "View", exchange_path(e), { :method => "get",  :class => "button is-light"} %>
             </td>
             <td><%= e.name %></td>
             <td><%= e.start_date.to_s(:long) %></td>

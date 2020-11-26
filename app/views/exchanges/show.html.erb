@@ -1,0 +1,52 @@
+<div class="card">
+  <div class="card-content">
+    <section class="section">
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">What is SnackBox?</h5>
+            </div>
+            <div class="column">
+                <p>SnackBox aims to bring employees together with something we all enjoy: snacks. SnackBox is a unidirectional exchange where employees are matched with someone to send a box of delicious local snacks. </p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">How does it work?</h5>
+            </div>
+            <div class="column">
+                <p>Those participating will be able to sign up and share any food allergies and preferences. After matching has occurred, each employee will have a given time period to ship the box of snacks. When the box arrives, open it up and let snack time begin!</p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">How do I sign up?</h5>
+            </div>
+            <div class="column">
+                <p>Before signing up, make sure you are in the department and country of the exchange.
+                Click the button <span class="has-text-weight-bold">Sign Up</span> and you will enter your name, email, address and any snack preferences.</p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">When does it start?</h5>
+            </div>
+            <div class="column">
+                <p>On the <span class="has-text-weight-bold">matching date</span>, you will receive an email with a link to your snackee and all their details! You will have until the <span class="has-text-weight-bold">end date</span> to ship your box.
+                You can be reimbursed up to <span class="has-text-weight-bold">$25</span> as well as shipping costs from Concur.</p>
+            </div>
+        </div>
+    </section>
+
+    <div>
+
+    </div>
+    <h4 class="title is-4">Current Exchange: <span class="has-text-primary"><%= @exchange.name %></h4>
+    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
+    <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
+    <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
+  <footer class="card-footer">
+    
+  </footer>
+</div>
