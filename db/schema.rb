@@ -24,4 +24,24 @@ ActiveRecord::Schema.define(version: 2020_11_25_213122) do
     t.string "details", null: false
     t.string "department", null: false
   end
+
+  create_table "participation", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.boolean "shipped", default: false
+    t.string "address_1"
+    t.string "address_2"
+    t.string "city"
+    t.string "state"
+    t.string "zipcode"
+    t.string "country"
+    t.string "preferences"
+    t.uuid "users_id"
+    t.index ["users_id"], name: "index_participation_on_users_id"
+  end
+
+  create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "full_name", null: false
+    t.string "email", null: false
+  end
+
+  add_foreign_key "participation", "users", column: "users_id"
 end
