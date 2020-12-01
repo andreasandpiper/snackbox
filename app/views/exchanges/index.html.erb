@@ -1,0 +1,34 @@
+<div class="card">
+  <div class="card-content">
+    <section class="section">
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">What is SnackBox?</h5>
+            </div>
+            <div class="column">
+                <p>SnackBox aims to bring employees together with something we all enjoy: snacks. SnackBox is a unidirectional exchange where employees are matched with someone to send a box of delicious local snacks. </p>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-one-fifth">
+                <h5 class="title is-5">How do I sign up?</h5>
+            </div>
+            <div class="column">
+                <p>If you are able to join an exchange, you will receive an email with a link to sign up for an exchange.</p>
+            </div>
+        </div>
+    </section>
+    </div>
+</div>
+
+Want to change your details for a current exchange? Enter email to receive an email with link to edit preferences.
+
+<%= form_with url: "/exchanges/update", method: :get do |form| %>
+    <div class="field">
+      <%= form.label :email, "Email", { :class => "label"} %>
+      <div class="control">
+      <%= form.text_field :email, { :class => "input"} %>
+      </div>
+    </div>
+    <%= form.submit "Get link", { :class => "button is-link is-light"} %>
+  <% end %>

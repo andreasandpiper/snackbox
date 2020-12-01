@@ -9,5 +9,5 @@ class Participation < ApplicationRecord
     validates :zipcode, presence: true
     validates :team, presence: true
 
-    # validates :user, uniqueness: { scope: :exchange, message: 'already signed up for exchange' }
+    # validate they haven't signed up for exchange yet
 end
