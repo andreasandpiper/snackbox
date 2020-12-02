@@ -1,40 +1,5 @@
 <%= form_with url: "/admin/exchanges", scope: :exchange, method: :post do |form| %>
-    <div class="field">
-      <%= form.label :name, "Exchange Name", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :name, { :class => "input"} %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :start_date, { :class => "input"}  %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :end_date, { :class => "input"} %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :department, "Department", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :department, { :class => "input"} %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :country, "Country", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :country, { :class => "input"} %>
-      </div>
-    </div>
-    <div class="field">
-      <%= form.label :details, "Details", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_area :details, { :class => "input"} %>
-      </div>
-    </div>
+    <%= render "form_fields", f: form %>
     <%= form.submit "Submit Exchange", { :class => "button is-link is-light"} %>
     <%= button_to "Back", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
   <% end %>

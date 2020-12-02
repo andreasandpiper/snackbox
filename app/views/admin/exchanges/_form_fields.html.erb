@@ -1,0 +1,30 @@
+<div class="field">
+      <%= f.label :name, "Exchange Name", { :class => "label"} %>
+      <div class="control">
+      <%= f.text_field :name, { :class => "input"} %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
+      <div class="control">
+        <%= date_select("exchange", "start_date", order: [:day, :month, :year], start_year: Date.current.year) %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
+      <div class="control">
+        <%= date_select("exchange", "end_date", order: [:day, :month, :year], start_year: Date.current.year) %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :country, "Country", { :class => "label"} %>
+      <div class="control">
+      <%= f.text_field :country, { :class => "input"} %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :details, "Details", { :class => "label"} %>
+      <div class="control">
+      <%= f.text_area :details, { :class => "input"} %>
+      </div>
+    </div>

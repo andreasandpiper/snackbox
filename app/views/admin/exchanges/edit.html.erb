@@ -1,43 +1,7 @@
 <%= form_for @exchange, url: admin_exchange_path(@exchange), html: { method: :put } do |f| %>
-    <div class="field">
-        <%= label :name, "Exchange Name", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_field :name, { :class => "input"} %>
-        </div>
-    </div>
-    <div class="field">
-        <%= f.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_field :start_date, { :class => "input"}  %>
-        </div>
-    </div>
-    <div class="field">
-        <%= f.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_field :end_date, { :class => "input"} %>
-        </div>
-    </div>
-    <div class="field">
-        <%= f.label :department, "Department", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_field :department, { :class => "input"} %>
-        </div>
-    </div>
-    <div class="field">
-        <%= f.label :country, "Country", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_field :country, { :class => "input"} %>
-        </div>
-    </div>
-    <div class="field">
-        <%= f.label :details, "Details", { :class => "label"} %>
-        <div class="control">
-        <%= f.text_area :details, { :class => "input"} %>
-        </div>
-    </div>
+    <%= render "form_fields", f: f %>
     <%= f.submit "Update", { :class => "button is-link is-light"} %>
 <% end %>
-
 <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
     
       
