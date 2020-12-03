@@ -23,6 +23,17 @@
       </div>
     </div>
   </section>
+  <% flash.each do |type, msg| %>
+    <% if type == "error" %>
+      <div class="notification is-danger is-light">
+        <%= msg %>
+      </div>
+    <% else %>
+      <div class="notification is-success is-light">
+        <%= msg %>
+      </div>
+    <% end %>
+  <% end %>
       <%= yield %>
     </div>
   </body>
