@@ -6,11 +6,20 @@ class ParticipationsController < ApplicationController
     end
 
     def create
-        user = User.find_or_create_by user_params
-        user.participation.create participation_params.merge(exchange__params)
-        redirect_to exchange_path(params[:exchange_id])
-    end
+        @user = User.find_or_create_by user_params
+        if @user.errors.any?
+            render :new
+        else 
+            @user.participation.new participation_params.merge(exchange__params)
+            if @user.participation
+                @user.participation.save
+                redirect_to exchange_path(params[:exchange_id])
+            else
+                render :new
+            end
+        end
 
+    end
 
     private
 
