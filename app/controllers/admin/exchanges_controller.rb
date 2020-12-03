@@ -16,9 +16,12 @@ module Admin
     end
 
     def create
-      exchange = Exchange.new exchange_params.merge(exchange_date_params)
-      exchange.save
-      redirect_to admin_exchanges_path
+      @exchange = Exchange.new exchange_params.merge(exchange_date_params)
+      if @exchange.save
+        redirect_to admin_exchanges_path
+      else
+        render :new
+      end
     end
 
     def edit

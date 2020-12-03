@@ -1,7 +1,7 @@
 <div class="field">
       <%= f.label :name, "Exchange Name", { :class => "label"} %>
       <div class="control">
-      <%= f.text_field :name, { :class => "input"} %>
+      <%= f.text_field :name, { :class => "input", :required => true} %>
       </div>
     </div>
     <div class="field">
@@ -19,7 +19,13 @@
     <div class="field">
       <%= f.label :country, "Country", { :class => "label"} %>
       <div class="control">
-      <%= f.text_field :country, { :class => "input"} %>
+      <%= f.text_field :country, { :class => "input", :required => true} %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :department, "Department", { :class => "label"} %>
+      <div class="control">
+      <%= f.text_field :department, { :class => "input", :required => true} %>
       </div>
     </div>
     <div class="field">
