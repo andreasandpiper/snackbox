@@ -199,9 +199,11 @@ DEPENDENCIES
   byebug
   jbuilder (~> 2.7)
   listen (~> 3.2)
+  nokogiri
   pg (>= 0.18, < 2.0)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
+  rake
   rubocop
   sass-rails (>= 6)
   spring
@@ -210,9 +212,6 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
-
-RUBY VERSION
-   ruby 2.6.3p62
 
 BUNDLED WITH
    2.1.4

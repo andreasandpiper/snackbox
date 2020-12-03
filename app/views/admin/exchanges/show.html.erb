@@ -32,7 +32,7 @@
     <% @participation.each do |e| %>
         <tr>
             <td><%= e.full_name %></td>
-            <td>TODO email</td>
+            <td><%= e.user.email %></td>
             <td><%= e.address_1 %> <%= e.address_2 %>, <%= e.city %>, <%= e.state %> <%= e.zipcode %> </td>
             <td><%= e.team %></td>
             <td><%= e.preferences %></td>
