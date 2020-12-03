@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module Admin
   class ExchangesController < ApplicationController
-    http_basic_authenticate_with :name => "user", :password => "password" 
-  
+    http_basic_authenticate_with name: 'user', password: 'password'
+
     def index
       @exchanges = Exchange.all
     end
@@ -41,14 +43,14 @@ module Admin
     end
 
     def exchange_date_params
-      formated_end_date = format_date("start_date")
-      formated_start_date = format_date("end_date")
-      return { end_date: formated_end_date, start_date: formated_start_date }
+      formated_end_date = format_date('start_date')
+      formated_start_date = format_date('end_date')
+      { end_date: formated_end_date, start_date: formated_start_date }
     end
 
     def format_date(key)
       hash = params.require(:exchange)
-      Date.new *%w(1 2 3).map { |e| hash["#{key}(#{e}i)"].to_i }
+      Date.new *%w[1 2 3].map { |e| hash["#{key}(#{e}i)"].to_i }
     end
   end
 end
