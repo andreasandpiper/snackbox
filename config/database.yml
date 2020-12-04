@@ -83,6 +83,6 @@ test:
 #
 production:
   <<: *default
-  database: snackbox_rails_production
-  username: snackbox_rails
+  database: snackbox_production
+  username: snackbox
   password: <%= ENV['POSTGRES_PASSWORD'] %>

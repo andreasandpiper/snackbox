@@ -10,7 +10,7 @@ services:
   web:
     build: .
     volumes:
-      - .:/my_app
+      - .:/snackbox
     ports:
       - "3000:3000"
     depends_on:

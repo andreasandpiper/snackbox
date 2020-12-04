@@ -20,15 +20,36 @@
     </section>
     </div>
 </div>
-
-Want to change your details for a current exchange? Enter email to receive an email with link to edit preferences.
-
-<%= form_with url: "/exchanges/update", method: :get do |form| %>
-    <div class="field">
-      <%= form.label :email, "Email", { :class => "label"} %>
-      <div class="control">
-      <%= form.text_field :email, { :class => "input"} %>
-      </div>
-    </div>
-    <%= form.submit "Get link", { :class => "button is-link is-light"} %>
-  <% end %>
+<h3 class="is-size-3 has-text-centered has-text-weight-semibold">Current Exchanges</h3>
+<table class="table is-fullwidth is-striped">
+  <thead>
+    <tr>
+        <th>Name</th>
+        <th>Start date</th>
+        <th>Country</th>
+        <th>Department</th>
+        <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @exchanges.each do |e| %>
+        <tr>
+            <td><%= e.name %></td>
+            <td><%= e.start_date.to_s(:long) %></td>
+            <td><%= e.country %></td>
+            <td><%= e.department %></td>
+            <td>
+            <%= form_with url: "/exchanges/update", method: :get do |form| %>
+                <div class="field is-horizontal">
+                <%= button_to "Sign Up", new_exchange_participation_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
+                  <div class="control">
+                  <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
+                  </div>
+                  <%= form.submit "Send", { :class => "button is-link is-light"} %>
+                </div>
+              <% end %>
+            </td>
+        </tr>
+    <% end %>
+  </tbody>
+</table>
