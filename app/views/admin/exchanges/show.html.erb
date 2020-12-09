@@ -12,6 +12,8 @@
     <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
     <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
     <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
+    <%= button_to "Create Matches", admin_path(@exchange), { :method => "get",  :class => "button is-light"} %>
+
 </div>
 <br>
 <br>
@@ -26,6 +28,7 @@
       <th>Address</th>
       <th>Team</th>
       <th>Preferences</th>
+      <th>Match</th>
     </tr>
   </thead>
   <tbody>
@@ -36,6 +39,7 @@
             <td><%= e.address_1 %> <%= e.address_2 %>, <%= e.city %>, <%= e.state %> <%= e.zipcode %> </td>
             <td><%= e.team %></td>
             <td><%= e.preferences %></td>
+            <td><%= e.match_participation_id %></td>
         </tr>
     <% end %>
   </tbody>

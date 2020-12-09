@@ -8,6 +8,8 @@ services:
     environment:
       POSTGRES_PASSWORD: password
   web:
+    stdin_open: true
+    tty: true
     build: .
     volumes:
       - .:/snackbox

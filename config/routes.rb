@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :exchanges, only: %i[index new create edit update show]
+    get 'exchange/:id/match', to: 'exchanges#match'
   end
 
   resources :exchanges, only: %i[show index] do

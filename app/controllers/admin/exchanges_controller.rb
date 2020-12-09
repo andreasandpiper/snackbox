@@ -36,6 +36,19 @@ module Admin
       redirect_to admin_exchanges_path
     end
 
+    def match
+      @exchange = Exchange.find params[:id]
+      matcher = ParticipationMatcher.new @exchange
+      matcher.match
+      @participation = @exchange.participation
+      render :show
+      rescue Exception
+        @exchange.reload
+        @participation = @exchange.participation
+        flash.now[:error] = "Something went wrong with matching."
+        render :show
+    end
+
     private
 
     def exchange_params

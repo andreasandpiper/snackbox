@@ -12,7 +12,6 @@ class ParticipationsController < ApplicationController
   end
 
   def create
-    byebug
     @exchange = Exchange.find params[:exchange_id]
     @user = User.find_or_create_by user_params
     @participation = @user.participation.new participation_params.merge(exchange_params)
