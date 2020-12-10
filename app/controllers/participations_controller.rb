@@ -25,6 +25,11 @@ class ParticipationsController < ApplicationController
     end
   end
 
+  def show
+    @exchange = Exchange.find params[:exchange_id]
+    @participation = @exchange.participation.find params[:id]
+  end
+
   private
 
   def participation_params

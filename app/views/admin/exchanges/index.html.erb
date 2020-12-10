@@ -29,7 +29,6 @@
             <td>
                 <%= button_to "Edit", edit_admin_exchange_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
                 <%= button_to "View", admin_exchange_path(e), { :method => "get",  :class => "button is-light"} %>
-                <%= button_to "Create Matches", admin_path(e), { :method => "get",  :class => "button is-light"} %>
             </td>
             <td><%= e.name %></td>
             <td><%= e.start_date.to_s(:long) %></td>

@@ -42,11 +42,19 @@ module Admin
       matcher.match
       @participation = @exchange.participation
       render :show
-      rescue Exception
-        @exchange.reload
-        @participation = @exchange.participation
-        flash.now[:error] = "Something went wrong with matching."
-        render :show
+    rescue Exception
+      @exchange.reload
+      @participation = @exchange.participation
+      flash.now[:error] = 'Something went wrong with matching.'
+      render :show
+    end
+
+    def match_is_viewable
+      @exchange = Exchange.find params[:id]
+      @exchange.update! is_matching_viewable: (not @exchange.is_matching_viewable)
+      @exchange.reload
+      @participation = @exchange.participation
+      render :show
     end
 
     private

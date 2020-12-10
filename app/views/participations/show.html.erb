@@ -1,0 +1,26 @@
+<% if @exchange.is_matching_viewable %>
+Alright, here is your match!
+
+Please ship your snackbox by <span class="has-text-weight-bold"><%= @exchange.end_date.to_s(:long) %></span>
+
+You can spend up to $25 USD and expense the cost of shipping as well.
+
+<table class="table is-fullwidth is-striped">
+<thead>
+<tr>
+<th>Name</th>
+<th>Address</th>
+<th>Preferences</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><%= @participation.full_name %></td>
+<td><%= @participation.address_1 %> <%= @participation.address_2 %>, <%= @participation.city %>, <%= @participation.state %> <%= @participation.zipcode %> </td>
+<td><%= @participation.preferences %></td>
+</tr>
+</tbody>
+</table>
+<% else %>
+    Uh oh, matching has not happened yet! Matching for this exchange happens on <span class="has-text-weight-bold"><%= @exchange.end_date.to_s(:long) %></span>.
+<% end %>

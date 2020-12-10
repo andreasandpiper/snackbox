@@ -1,0 +1,4 @@
+<%= form_for exchange, url: "/admin/exchange/#{exchange.id}/set_view", html: { method: :post } do |e| %>
+    <%= e.label :is_matching_viewable, "Is matching viewable?" %> <%= exchange.is_matching_viewable ? "yes": "no" %>
+    <%= e.submit "Change viewing", { :class => "button is-link is-light"} %>
+  <% end %>

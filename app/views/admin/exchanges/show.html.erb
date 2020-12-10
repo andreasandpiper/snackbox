@@ -12,8 +12,7 @@
     <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
     <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
     <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
-    <%= button_to "Create Matches", admin_path(@exchange), { :method => "get",  :class => "button is-light"} %>
-
+    <%= render partial: "set_match_checkbox", locals: {exchange: @exchange} %>
 </div>
 <br>
 <br>
@@ -23,6 +22,7 @@
 <table class="table is-fullwidth is-striped">
   <thead>
     <tr>
+      <th>id</th>
       <th>Name</th>
       <th>Email</th>
       <th>Address</th>
@@ -33,13 +33,15 @@
   </thead>
   <tbody>
     <% @participation.each do |e| %>
+      <% match = @participation.find { |p| p.id == e.match_participation_id} %>
         <tr>
+            <td><%= e.id %></td>
             <td><%= e.full_name %></td>
             <td><%= e.user.email %></td>
             <td><%= e.address_1 %> <%= e.address_2 %>, <%= e.city %>, <%= e.state %> <%= e.zipcode %> </td>
             <td><%= e.team %></td>
             <td><%= e.preferences %></td>
-            <td><%= e.match_participation_id %></td>
+            <td><%= match && match.user.email %></td>
         </tr>
     <% end %>
   </tbody>
