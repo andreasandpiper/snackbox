@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ParticipationsController < ApplicationController
+  before_action :check_valid_token, only: [:edit]
+
   def new
     @exchange = Exchange.find params[:exchange_id]
     @participation = Participation.new
@@ -8,6 +10,7 @@ class ParticipationsController < ApplicationController
   end
 
   def edit
+    # check token first
     @exchange = Exchange.find params[:exchange_id]
   end
 
@@ -17,18 +20,13 @@ class ParticipationsController < ApplicationController
     @participation = @user.participation.new participation_params.merge(exchange_params)
     if @participation.valid?
       @participation.save
-      flash.now[:notice] =
-        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}.'"
-      render :edit
+      flash[:notice] =
+        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}. You will get an email with your matchers information. In order to edit your preferences, you will need a new sign up link sent to you."
+      redirect_to exchanges_path
     else
       flash.now[:alert] = @participation.errors.full_messages.to_sentence
       render :new
     end
-  end
-
-  def show
-    @exchange = Exchange.find params[:exchange_id]
-    @participation = @exchange.participation.find params[:id]
   end
 
   def edit_link
@@ -53,6 +51,10 @@ class ParticipationsController < ApplicationController
   end
 
   private
+
+  def check_valid_token
+    binding.pry
+  end
 
   def participation_params
     params.require(:participation).permit(:full_name, :address_1, :address_2, :city, :state, :zipcode, :country,
