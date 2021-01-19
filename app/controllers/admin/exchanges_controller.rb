@@ -45,13 +45,13 @@ module Admin
     rescue Exception
       @exchange.reload
       @participation = @exchange.participation
-      flash.now[:error] = 'Something went wrong with matching.'
+      flash.now[:alert] = 'Something went wrong with matching.'
       render :show
     end
 
     def match_is_viewable
       @exchange = Exchange.find params[:id]
-      @exchange.update! is_matching_viewable: (not @exchange.is_matching_viewable)
+      @exchange.update! is_matching_viewable: !@exchange.is_matching_viewable
       @exchange.reload
       @participation = @exchange.participation
       render :show
@@ -71,7 +71,7 @@ module Admin
 
     def format_date(key)
       hash = params.require(:exchange)
-      Date.new *%w[1 2 3].map { |e| hash["#{key}(#{e}i)"].to_i }
+      Date.new(*%w[1 2 3].map { |e| hash["#{key}(#{e}i)"].to_i })
     end
   end
 end

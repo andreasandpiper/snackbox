@@ -11,5 +11,6 @@ Rails.application.routes.draw do
 
   resources :exchanges, only: %i[show index] do
     resources :participations, only: %i[new show edit create update]
+    get '/link', to: 'participations#edit_link'
   end
 end

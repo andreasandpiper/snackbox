@@ -39,15 +39,25 @@
             <td><%= e.country %></td>
             <td><%= e.department %></td>
             <td>
-            <%= form_with url: "/exchanges/update", method: :get do |form| %>
-                <div class="field is-horizontal">
-                <%= button_to "Sign Up", new_exchange_participation_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
-                  <div class="control">
-                  <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
-                  </div>
-                  <%= form.submit "Send", { :class => "button is-link is-light"} %>
+            <div class="columns">
+              <div class="column">
+                <div class="field">
+                  <%= button_to "Sign Up", new_exchange_participation_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
                 </div>
-              <% end %>
+              </div>
+              <div class="column is-three-quarters">
+                <div class="field has-addons">
+                  <%= form_with url: "/exchanges/#{e.id}/link", method: :get do |form| %>
+                    <div class="control">
+                      <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
+                    </div>
+                    <div class="control">
+                      <%= form.submit "Send", { :class => "button is-info is-light"} %>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
             </td>
         </tr>
     <% end %>
