@@ -49,14 +49,6 @@ module Admin
       render :show
     end
 
-    def match_is_viewable
-      @exchange = Exchange.find params[:id]
-      @exchange.update! is_matching_viewable: !@exchange.is_matching_viewable
-      @exchange.reload
-      @participation = @exchange.participation
-      render :show
-    end
-
     private
 
     def exchange_params

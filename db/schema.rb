@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2021_01_19_212238) do
     t.string "country", null: false
     t.string "details", null: false
     t.string "department", null: false
-    t.boolean "is_matching_viewable", default: false, null: false
   end
 
   create_table "participation_tokens", force: :cascade do |t|
