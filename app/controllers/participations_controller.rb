@@ -1,7 +1,6 @@
 # frozen_string_literal: true
-
 class ParticipationsController < ApplicationController
-  before_action :check_valid_token, only: [:edit]
+  before_action :check_valid_token, only: [:edit, :delete]
 
   def new
     @exchange = Exchange.find params[:exchange_id]
@@ -10,8 +9,9 @@ class ParticipationsController < ApplicationController
   end
 
   def edit
-    # check token first
     @exchange = Exchange.find params[:exchange_id]
+    @participation = @exchange.participation.find params[:id]
+    @user = @participation.user
   end
 
   def create
@@ -29,23 +29,33 @@ class ParticipationsController < ApplicationController
     end
   end
 
+  def delete
+    byebug
+  end
+
   def edit_link
     # TODO: why are flashes and redirect not working?
     @exchange = Exchange.find params[:exchange_id]
     @participation = Participation.new
     @user = User.find_by email: params[:email]
     if @user.nil?
-      flash[:alert] = 'You have not signed up for the exchange.'
-      render :new
+      flash[:alert] = 'You have not signed up for the exchange, sign up below.'
+      @user = User.new
+      respond_to do |format|
+        format.js { render :js => "window.location.href = '#{new_exchange_participation_path(@exchange)}'" }
+      end
     else
       participation = @user.participation.find_by exchange_id: params[:exchange_id]
       if participation
         ParticipationMailer.with(participation: participation,
-                                 exchange_id: params[:exchange_id]).edit_participation.deliver_now
-        flash[:notice] = "Email sent to #{params[:email]}"
+                                 exchange_id: params[:exchange_id],).edit_participation.deliver_now
+        # flash not working
+        flash.now[:notice] = "Email sent to #{params[:email]}"
       else
         flash[:alert] = 'You have not signed up for the exchange.'
-        render :new
+        respond_to do |format|
+          format.js { render :js => "window.location.href = '#{new_exchange_participation_path(@exchange)}'" }
+        end
       end
     end
   end
@@ -53,7 +63,11 @@ class ParticipationsController < ApplicationController
   private
 
   def check_valid_token
-    binding.pry
+    valid_token = ParticipationToken.find_by token: params[:token], participation_id: params[:id]
+    unless valid_token
+      flash[:error] = "This link has expired. Please re-submit email address to get a new link."
+      redirect_to exchanges_path
+    end
   end
 
   def participation_params
