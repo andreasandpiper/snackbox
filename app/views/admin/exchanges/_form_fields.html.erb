@@ -7,13 +7,13 @@
     <div class="field">
       <%= f.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "start_date", order: [:day, :month, :year], start_year: Date.current.year) %>
+        <%= date_select("exchange", "start_date", order: [:day, :month, :year]) %>
       </div>
     </div>
     <div class="field">
       <%= f.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "end_date", order: [:day, :month, :year], start_year: Date.current.year) %>
+        <%= date_select("exchange", "end_date", order: [:day, :month, :year]) %>
       </div>
     </div>
     <div class="field">
