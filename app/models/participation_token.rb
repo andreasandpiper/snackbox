@@ -1,0 +1,2 @@
+class ParticipationToken < ApplicationRecord
+end

@@ -26,10 +26,10 @@ ActiveRecord::Schema.define(version: 2021_01_19_212238) do
     t.boolean "is_matching_viewable", default: false, null: false
   end
 
-  create_table "participation_token", force: :cascade do |t|
+  create_table "participation_tokens", force: :cascade do |t|
     t.datetime "expires_at", null: false
     t.string "token", null: false
-    t.string "user_id", null: false
+    t.string "participation_id", null: false
   end
 
   create_table "participations", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
