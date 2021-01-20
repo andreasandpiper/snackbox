@@ -11,5 +11,5 @@ class Participation < ApplicationRecord
   validates :zipcode, presence: true
   validates :team, presence: true
 
-  # validates :user_id, presence: true, uniqueness: { message: 'cannot sign up for the same exchange more than once.' }
+  validates :user_id, presence: true, uniqueness: { scope: :exchange, message: 'cannot sign up for the same exchange more than once.' }
 end
