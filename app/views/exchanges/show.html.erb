@@ -37,29 +37,25 @@
         </div>
     </section>
     <section>
-
+    <h4 class="title is-4">Current Exchange Name: <span class="has-text-primary"><%= @exchange.name %></h4>
+    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
+    <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
+    <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
+    <% if @exchange.details.present? %>
+        <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
+    <% end %>
     </section>
-    <div class="columns">
-        <div class="column">
-            <h4 class="title is-4">Current Exchange: <span class="has-text-primary"><%= @exchange.name %></h4>
-            <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
-            <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
-            <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
-            <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
-            <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
-        </div>
-        <div class="column">
-        <%= form_with url: "/exchanges/#{@exchange.id}/link", method: :get do |form| %>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <%= form.text_field :email, { :class => "input", :placeholder => "Enter Teladoc email address"} %>
-                </div>
-                <div class="control">
-                    <%= form.submit "Sign Up or resend edit preferences link", { :type => "submit", :class => "button is-info"} %>
-                </div>
+    <hr>
+    <%= form_with url: "/exchanges/#{@exchange.id}/link", method: :get do |form| %>
+        <div class="field has-addons">
+            <div class="control">
+                <%= form.text_field :email, { :class => "input", :placeholder => "Enter Teladoc email address"} %>
             </div>
-        <% end %>
+            <div class="control">
+                <%= form.submit "Sign Up or resend edit preferences link", { :type => "submit", :class => "button is-info"} %>
+            </div>
         </div>
-      </div>
+    <% end %>
     </div>
 </div>

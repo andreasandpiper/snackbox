@@ -8,10 +8,13 @@
     <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
     <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
     <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
+    <div class="buttons">
+    <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary m-1"} %>
+    <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-info m-1"} %>
+    <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-link m-1"} %>
+    <%= button_to "Match Participants", admin_path(@exchange), { :method => "get",  :class => "button m-1"} %>
     </div>
-    <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
-    <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
-    <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
+    </div>
 </div>
 <br>
 <br>
