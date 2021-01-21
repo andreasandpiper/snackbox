@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ParticipationsController < ApplicationController
-  before_action :check_valid_token, only: %i[edit delete]
+  before_action :check_valid_token, only: %i[edit]
 
   def new
     @exchange = Exchange.find params[:exchange_id]
@@ -30,8 +30,9 @@ class ParticipationsController < ApplicationController
 
   def create
     @exchange = Exchange.find params[:exchange_id]
-    @user = User.find_or_create_by user_params.downcase
+    @user = User.find_or_create_by email: params[:email].downcase
     @participation = @user.participation.new participation_params.merge(exchange_params)
+    byebug
     if @participation.valid?
       @participation.save
       flash[:notice] =
@@ -43,8 +44,17 @@ class ParticipationsController < ApplicationController
     end
   end
 
-  def delete
-    byebug
+  def destroy
+    participation = Participation.find params[:id]
+    if participation.destroy
+      flash[:notice] = "You've successfully removed participation from the '#{@exchange[:name].capitalize}' exchange."
+      redirect_to exchanges_path
+    else
+      @exchange = @participation.exchange
+      @user = @participation.user
+      flash.now[:alert] = @participation.errors.full_messages.to_sentence
+      render :edit
+    end
   end
 
   def edit_link
@@ -91,9 +101,5 @@ class ParticipationsController < ApplicationController
 
   def exchange_params
     params.permit(:exchange_id)
-  end
-
-  def user_params
-    params.permit(:email)
   end
 end

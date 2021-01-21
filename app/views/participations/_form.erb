@@ -91,7 +91,13 @@
           <%= form.text_area :preferences, { :class => "textarea has-fixed-size"} %>
           </div>
         </div>
-        <%= form.submit label, { :class => "button is-link is-light"} %>
+          <%= form.submit label, { :class => "button is-link is-light"} %>
+          <div class="buttons is-right">
+          <% if label === "Update" %>
+            <%= button_to "Remove from exchange", {:controller => :participations,
+              :action => 'destroy', :id => @participation.id }, { class: "button is-danger is-right", method: :delete} %>
+          <% end %>
+        </div>
     <% end %>
     </div>
 </div>
