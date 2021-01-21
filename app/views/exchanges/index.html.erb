@@ -45,18 +45,18 @@
                   <%= button_to "Sign Up", new_exchange_participation_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
                 </div>
               </div>
-              <div class="column is-three-quarters">
-                <div class="field has-addons">
-                  <%= form_with url: "/exchanges/#{e.id}/link", method: :get do |form| %>
+              <div class="column is-four-fifths">
+                <%= form_with url: "/exchanges/#{e.id}/link", method: :get do |form| %>
+                  <div class="field has-addons">
+                    <div class="control is-expanded">
+                    <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
+                  </div>
                     <div class="control">
-                      <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
-                    </div>
-                    <div class="control">
-                      <%= form.submit "Send", { :class => "button is-info is-light"} %>
-                    </div>
+                    <%= form.submit "Send", { :type => "submit", :class => "button is-info is-light"} %>
+                  </div>
                   </div>
                 <% end %>
-              </div>
+                </div>
             </div>
             </td>
         </tr>
