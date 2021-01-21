@@ -7,6 +7,9 @@ class ParticipationsController < ApplicationController
     @exchange = Exchange.find params[:exchange_id]
     @participation = Participation.new
     @user = User.new
+    if params[:email]
+      @user.email = params[:email]
+    end
   end
 
   def edit
@@ -32,14 +35,13 @@ class ParticipationsController < ApplicationController
     @exchange = Exchange.find params[:exchange_id]
     @user = User.find_or_create_by email: params[:email].downcase
     @participation = @user.participation.new participation_params.merge(exchange_params)
-    byebug
     if @participation.valid?
       @participation.save
       flash[:notice] =
         "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}. You will get an email with your matchers information. In order to edit your preferences, you will need a new sign up link sent to you."
       redirect_to exchanges_path
     else
-      flash.now[:alert] = @participation.errors.full_messages.to_sentence
+      flash.now[:alert] = @participation.errors.full_messages.concat(@user.errors.full_messages).join(", ")
       render :new
     end
   end
@@ -47,7 +49,7 @@ class ParticipationsController < ApplicationController
   def destroy
     participation = Participation.find params[:id]
     if participation.destroy
-      flash[:notice] = "You've successfully removed participation from the '#{@exchange[:name].capitalize}' exchange."
+      flash[:notice] = "You've been removed from participating in the exchange."
       redirect_to exchanges_path
     else
       @exchange = @participation.exchange
@@ -58,29 +60,23 @@ class ParticipationsController < ApplicationController
   end
 
   def edit_link
-    # TODO: why are flashes and redirect not working?
     @exchange = Exchange.find params[:exchange_id]
     @participation = Participation.new
     @user = User.find_by email: params[:email].downcase
-    if @user.nil?
-      flash[:alert] = 'You have not signed up for the exchange, sign up below.'
-      @user = User.new
-      respond_to do |format|
-        format.js { render js: "window.location.href = '#{new_exchange_participation_path(@exchange)}'" }
-      end
-    else
+    if @user.present?
       participation = @user.participation.find_by exchange_id: params[:exchange_id]
       if participation
         ParticipationMailer.with(participation: participation,
-                                 exchange_id: params[:exchange_id]).edit_participation.deliver_now
-        # flash not working
-        flash.now[:notice] = "Email sent to #{params[:email]}"
-      else
-        flash[:alert] = 'You have not signed up for the exchange.'
+                                  exchange_id: params[:exchange_id]).edit_participation.deliver_now
+        flash[:notice] = "Email sent to #{params[:email]}"
         respond_to do |format|
-          format.js { render js: "window.location.href = '#{new_exchange_participation_path(@exchange)}'" }
+          format.js { render js: "window.location.href = '#{exchanges_path}'" }
         end
       end
+    end
+    flash[:alert] = 'You have not signed up for the exchange.'
+    respond_to do |format|
+      format.js { render js: "window.location.href = '#{new_exchange_participation_path(@exchange)}?email=#{params[:email]}'" }
     end
   end
 

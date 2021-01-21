@@ -39,13 +39,27 @@
     <section>
 
     </section>
-    <h4 class="title is-4">Current Exchange: <span class="has-text-primary"><%= @exchange.name %></h4>
-    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
-    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
-    <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
-    <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
-    <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
-  <footer class="card-footer">
-  <%= button_to "Sign Up", new_exchange_participation_path(@exchange), { :method => "get",  :class => "button is-primary is-light"} %>
-  </footer>
+    <div class="columns">
+        <div class="column">
+            <h4 class="title is-4">Current Exchange: <span class="has-text-primary"><%= @exchange.name %></h4>
+            <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.to_s(:long) %></div>
+            <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.to_s(:long) %></div>
+            <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
+            <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
+            <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>
+        </div>
+        <div class="column">
+        <%= form_with url: "/exchanges/#{@exchange.id}/link", method: :get do |form| %>
+            <div class="field has-addons">
+                <div class="control is-expanded">
+                    <%= form.text_field :email, { :class => "input", :placeholder => "Enter Teladoc email address"} %>
+                </div>
+                <div class="control">
+                    <%= form.submit "Sign Up or resend edit preferences link", { :type => "submit", :class => "button is-info"} %>
+                </div>
+            </div>
+        <% end %>
+        </div>
+      </div>
+    </div>
 </div>

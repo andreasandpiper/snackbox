@@ -18,48 +18,5 @@
             </div>
         </div>
     </section>
-    </div>
+  </div>
 </div>
-<h3 class="is-size-3 has-text-centered has-text-weight-semibold">Current Exchanges</h3>
-<table class="table is-fullwidth is-striped">
-  <thead>
-    <tr>
-        <th>Name</th>
-        <th>Start date</th>
-        <th>Country</th>
-        <th>Department</th>
-        <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @exchanges.each do |e| %>
-        <tr>
-            <td><%= e.name %></td>
-            <td><%= e.start_date.to_s(:long) %></td>
-            <td><%= e.country %></td>
-            <td><%= e.department %></td>
-            <td>
-            <div class="columns">
-              <div class="column">
-                <div class="field">
-                  <%= button_to "Sign Up", new_exchange_participation_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
-                </div>
-              </div>
-              <div class="column is-four-fifths">
-                <%= form_with url: "/exchanges/#{e.id}/link", method: :get do |form| %>
-                  <div class="field has-addons">
-                    <div class="control is-expanded">
-                    <%= form.text_field :email, { :class => "input", :placeholder => "Enter email to edit preferences"} %>
-                  </div>
-                    <div class="control">
-                    <%= form.submit "Send", { :type => "submit", :class => "button is-info is-light"} %>
-                  </div>
-                  </div>
-                <% end %>
-                </div>
-            </div>
-            </td>
-        </tr>
-    <% end %>
-  </tbody>
-</table>
