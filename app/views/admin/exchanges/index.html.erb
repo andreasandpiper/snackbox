@@ -1,11 +1,9 @@
-
-
 <nav class="navbar" role="navigation" aria-label="main navigation">
     <h1 class="title is-1 center">Admin</h1>
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-        <%= button_to "New exchange", { :action => "new" }, {:method => :get, :class => "button is-link is-light"} %>
+        <%= button_to "New exchange", { :action => "new" }, {:method => :get, :class => "button is-link"} %>
         </div>
       </div>
     </div>
@@ -14,7 +12,7 @@
 <table class="table is-fullwidth is-striped">
   <thead>
     <tr>
-        <th></th>
+      <th></th>
       <th>Name</th>
       <th>Start date</th>
       <th>End date</th>
@@ -27,8 +25,10 @@
     <% @exchanges.each do |e| %>
         <tr>
             <td>
-                <%= button_to "Edit", edit_admin_exchange_path(e), { :method => "get",  :class => "button is-primary is-light"} %>
-                <%= button_to "View", admin_exchange_path(e), { :method => "get",  :class => "button is-light"} %>
+              <div class="buttons">
+                <%= button_to "Edit", edit_admin_exchange_path(e), { :method => "get",  :class => "button is-primary m-1"} %>
+                <%= button_to "View", admin_exchange_path(e), { :method => "get",  :class => "button m-1"} %>
+              </div>
             </td>
             <td><%= e.name %></td>
             <td><%= e.start_date.to_s(:long) %></td>
