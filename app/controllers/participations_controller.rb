@@ -21,7 +21,7 @@ class ParticipationsController < ApplicationController
   def update
     @participation = Participation.find params[:id]
     @exchange = @participation.exchange
-    @user = @participation.user
+    @user = User.find_or_create_by email: params[:email].downcase.strip
     if @participation.update participation_params.merge(exchange_params)
       flash.now[:notice] = "You've successfully updated your preferences!"
       render :edit
@@ -33,13 +33,13 @@ class ParticipationsController < ApplicationController
 
   def create
     @exchange = Exchange.find params[:exchange_id]
-    @user = User.find_or_create_by email: params[:email].downcase
+    @user = User.find_or_create_by email: params[:email].downcase.strip
     @participation = @user.participation.new participation_params.merge(exchange_params)
     if @participation.valid?
       @participation.save
       flash[:notice] =
-        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}. You will get an email with your matchers information. In order to edit your preferences, you will need a new sign up link sent to you."
-      redirect_to exchanges_path
+        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}, in which you will get an email with your matchers information. In order to edit your preferences in the future, you will need to visit the home page to get a link to edit."
+      render :edit
     else
       flash.now[:alert] = @participation.errors.full_messages.concat(@user.errors.full_messages).join(", ")
       render :new
@@ -49,7 +49,7 @@ class ParticipationsController < ApplicationController
   def destroy
     participation = Participation.find params[:id]
     if participation.destroy
-      flash[:notice] = "You've been removed from participating in the exchange."
+      flash[:alert] = "You've been removed from participating in the exchange."
       redirect_to exchanges_path
     else
       @exchange = @participation.exchange
@@ -62,13 +62,13 @@ class ParticipationsController < ApplicationController
   def edit_link
     @exchange = Exchange.find params[:exchange_id]
     @participation = Participation.new
-    @user = User.find_by email: params[:email].downcase
+    @user = User.find_by email: params[:email].downcase.strip
     if @user.present?
       participation = @user.participation.find_by exchange_id: params[:exchange_id]
       if participation
         ParticipationMailer.with(participation: participation,
                                   exchange_id: params[:exchange_id]).edit_participation.deliver_now
-        flash[:notice] = "Email sent to #{params[:email]}"
+        flash[:notice] = "Email sent to #{params[:email]}. The link will expire in 24 hours."
         respond_to do |format|
           format.js { render js: "window.location.href = '#{exchange_path(@exchange)}'" }
         end
