@@ -70,8 +70,9 @@ class ParticipationsController < ApplicationController
                                   exchange_id: params[:exchange_id]).edit_participation.deliver_now
         flash[:notice] = "Email sent to #{params[:email]}"
         respond_to do |format|
-          format.js { render js: "window.location.href = '#{exchanges_path}'" }
+          format.js { render js: "window.location.href = '#{exchange_path(@exchange)}'" }
         end
+        return
       end
     end
     flash[:alert] = 'You have not signed up for the exchange.'
@@ -83,8 +84,8 @@ class ParticipationsController < ApplicationController
   private
 
   def check_valid_token
-    valid_token = ParticipationToken.find_by token: params[:token], participation_id: params[:id]
-    unless valid_token
+    valid_token = ParticipationToken.where("token = ? AND participation_id = ? AND expires_at >= ?", params[:token], params[:id], Time.now )
+    unless valid_token.present?
       flash[:error] = 'This link has expired. Please re-submit email address to get a new link.'
       redirect_to exchanges_path
     end

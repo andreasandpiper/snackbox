@@ -20,7 +20,7 @@ end
 
 def participation(e)
   first_name = Faker::Name.first_name
-  user = User.create(email: "#{first_name}@teladochealth.com")
+  user = User.create(email: "#{first_name}@teladochealth.com".downcase)
   e.participation.create(full_name: "#{first_name} #{Faker::Name.last_name}", team: TEAMS[rand(TEAMS.length)],
                          address_1: Faker::Address.street_address, city: Faker::Address.city, state: Faker::Address.state, zipcode: Faker::Address.zip, country: Faker::Address.country, user_id: user.id)
 end

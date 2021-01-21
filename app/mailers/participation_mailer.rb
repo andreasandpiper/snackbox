@@ -5,7 +5,7 @@ class ParticipationMailer < ApplicationMailer
     random_token = SecureRandom.alphanumeric(6)
     current_token = ParticipationToken.find_by participation_id: params[:participation].id
     if current_token
-      current_token.update token: random_token
+      current_token.update token: random_token, expires_at: Time.now + 1.day
     else
       ::ParticipationToken.create token: random_token, participation_id: params[:participation].id,
                                   expires_at: Time.now + 1.day
