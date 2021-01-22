@@ -2,7 +2,7 @@
 
 module Admin
   class ExchangesController < ApplicationController
-    http_basic_authenticate_with name: 'user', password: 'password'
+    http_basic_authenticate_with name: ENV.fetch("ADMIN_USERNAME"), password: ENV.fetch("ADMIN_PASSWORD")
 
     def index
       @exchanges = Exchange.all
