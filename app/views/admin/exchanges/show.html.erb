@@ -24,6 +24,7 @@
 <table class="table is-fullwidth is-striped">
   <thead>
     <tr>
+      <th>valid?</th>
       <th>id</th>
       <th>Name</th>
       <th>Email</th>
@@ -37,6 +38,9 @@
     <% @participation.each do |e| %>
       <% match = @participation.find { |p| p.id == e.match_participation_id} %>
         <tr>
+            <td>
+              <%= render "set_match_ready", participation: e, exchange: @exchange %>
+            </td>
             <td><%= e.id %></td>
             <td><%= e.full_name %></td>
             <td><%= e.user.email %></td>

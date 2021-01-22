@@ -81,6 +81,13 @@ class ParticipationsController < ApplicationController
     end
   end
 
+  def set_match_ready
+    participation = Participation.find params[:id]
+    participation.update is_match_ready: ActiveModel::Type::Boolean.new.cast(!!params[:is_match_ready])
+    flash[:notice] = "Successfully update match readieness for participant #{participation.id}"
+    redirect_to admin_exchange_url(participation.exchange)
+  end
+
   private
 
   def check_valid_token
