@@ -5,12 +5,12 @@ module Admin
     http_basic_authenticate_with name: ENV.fetch("ADMIN_USERNAME"), password: ENV.fetch("ADMIN_PASSWORD")
 
     def index
-      @exchanges = Exchange.all
+      @exchanges = Exchange.all.most_current_first
     end
 
     def show
       @exchange = Exchange.find params[:id]
-      @participation = @exchange.participation.joins(:user)
+      @participation = @exchange.participants
     end
 
     def new
@@ -41,11 +41,11 @@ module Admin
       @exchange.participation.update_all is_matched: false, match_participation_id: nil
       matcher = ParticipationMatcher.new @exchange
       matcher.match
-      @participation = @exchange.participation
+      @participation = @exchange.participants
       render :show
     rescue Exception
       @exchange.reload
-      @participation = @exchange.participation
+      @participation = @exchange.participants
       flash.now[:alert] = 'Something went wrong with matching.'
       render :show
     end

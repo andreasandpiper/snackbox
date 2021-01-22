@@ -12,6 +12,8 @@ class ParticipationMatcher
         p.update!(match_participation_id: match.id)
         match.update!(is_matched: true)
       end
+    rescue
+      raise ActiveRecord::Rollback
     end
   end
 
