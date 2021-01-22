@@ -50,6 +50,11 @@ module Admin
       render :show
     end
 
+    def deliver_matches
+      exchange = Exchange.find params[:exchange_id]
+      ExchangeMailer.with(exchange: exchange).send_matching.deliver_now
+    end
+
     private
 
     def exchange_params

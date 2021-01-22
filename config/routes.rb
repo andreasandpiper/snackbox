@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     resources :exchanges, only: %i[index new create edit update show]
     get 'exchange/:id/match', to: 'exchanges#match'
     post 'exchange/:id/set_view', to: 'exchanges#match_is_viewable'
+    get 'exchange/:id/deliver_matches', to: 'exchanges#deliver_matches'
   end
-  
+
   resources :exchanges, only: %i[show index] do
     resources :participations, only: %i[new edit create update destroy]
     get '/link', to: 'participations#edit_link'

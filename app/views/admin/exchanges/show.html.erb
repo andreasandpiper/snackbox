@@ -13,6 +13,7 @@
     <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-info m-1"} %>
     <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-link m-1"} %>
     <%= button_to "Match Participants", admin_path(@exchange), { :method => "get",  :class => "button m-1"} %>
+    <%= button_to "Email match info", "/admin/exchange/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1"} %>
     </div>
     </div>
 </div>
