@@ -2,12 +2,12 @@
 
 class ParticipationMatcher
   def initialize(exchange)
-    @exchange = exchange
+    @participants = exchange.match_ready_participants
   end
 
   def match
     ActiveRecord::Base.transaction do
-      @exchange.participation.map do |p|
+      @participants.map do |p|
         match = find_available_participation(p)
         p.update!(match_participation_id: match.id)
         match.update!(is_matched: true)
@@ -18,7 +18,7 @@ class ParticipationMatcher
   private
 
   def find_available_participation(p)
-    available = @exchange.participation.where('is_matched IS ?', false).where('id != ?', p[:id])
+    available = @participants.where('id != ?', p[:id])
     participation_from_other_team = available.where('team NOT LIKE ? ', p[:team])
     participation_from_other_team_and_state = participation_from_other_team.where('state NOT LIKE ?', p[:state])
     if participation_from_other_team.empty?

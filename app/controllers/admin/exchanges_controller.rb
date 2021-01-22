@@ -38,9 +38,7 @@ module Admin
 
     def match
       @exchange = Exchange.find params[:id]
-      if @exchange.participation.first.match_participation_id.present?
-        @exchange.participation.update_all is_matched: false
-      end
+      @exchange.participation.update_all is_matched: false, match_participation_id: nil
       matcher = ParticipationMatcher.new @exchange
       matcher.match
       @participation = @exchange.participation

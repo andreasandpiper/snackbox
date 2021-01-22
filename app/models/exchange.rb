@@ -8,4 +8,8 @@ class Exchange < ApplicationRecord
   validates :end_date, presence: true
   validates :country, presence: true
   validates :department, presence: true
+
+  def match_ready_participants
+    participation.where('is_matched IS ? AND is_match_ready IS ?', false, true)
+  end
 end
