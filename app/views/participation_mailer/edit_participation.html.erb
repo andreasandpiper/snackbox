@@ -4,12 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>SnackBox</h1>
+    <h1>SnackBox | Teladoc Health</h1>
     <p>
       You have requested a link to update your exchange preferences.
     </p>
     <p>
-      To update, just follow this link: <%= @url %>
+      To update, just follow this <%= link_to "link", @url, target: "_blank", rel: "nofollow" %>
     </p>
     <p>Thanks for signing up for SnackBox and happy snacking!</p>
   </body>

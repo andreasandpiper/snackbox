@@ -29,7 +29,15 @@
 <br>
 <div class="card">
   <div class="card-content">
-  By clicking the button below, you will send am email to all participants who have matches. 
+  Send a reminder matching is happening soon!
+  <%= button_to "Send reminder", "/admin/exchange/#{@exchange.id}/send_reminder", { :method => "get",  :class => "button m-1"} %>
+  </div>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+  By clicking the button below, you will send a email to all participants who have matches. 
   <%= button_to "Email match info", "/admin/exchange/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1"} %>
   </div>
 </div>

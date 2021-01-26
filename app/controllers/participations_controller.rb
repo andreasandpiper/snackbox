@@ -75,7 +75,7 @@ class ParticipationsController < ApplicationController
         return
       end
     end
-    flash[:alert] = 'You have not signed up for the exchange.'
+    flash[:alert] = 'You have not signed up for the exchange, fill out the form below to sign up!'
     respond_to do |format|
       format.js { render js: "window.location.href = '#{new_exchange_participation_path(@exchange)}?email=#{params[:email]}'" }
     end

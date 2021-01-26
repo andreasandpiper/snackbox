@@ -56,7 +56,13 @@ module Admin
       @exchange.update mailed_matches: true
       flash[:notice] = "Successfully mailed out matches!"
       redirect_to admin_exchange_url(@exchange)
-      rescue
+    end
+
+    def send_reminder
+      @exchange = Exchange.find params[:id]
+      ExchangeMailer.with(exchange: @exchange).send_reminder.deliver_now
+      flash[:notice] = "Successfully mailed out reminder!"
+      redirect_to admin_exchange_url(@exchange)
     end
 
     private

@@ -10,7 +10,7 @@ class ParticipationMailer < ApplicationMailer
       ::ParticipationToken.create token: random_token, participation_id: params[:participation].id,
                                   expires_at: Time.now + 1.day
     end
-    @url = "/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{random_token}"
-    mail(to: params[:participation].user.email, subject: 'SnackBox Link to edit participation for exchange')
+    @url = "#{ENV.fetch("BASE_URL")}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{random_token}"
+    mail(to: params[:participation].user.email, subject: 'SnackBox | Link to edit details')
   end
 end

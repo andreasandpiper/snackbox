@@ -8,6 +8,7 @@ Rails.application.routes.draw do
     get 'exchange/:id/match', to: 'exchanges#match'
     post 'exchange/:id/set_view', to: 'exchanges#match_is_viewable'
     get 'exchange/:id/deliver_matches', to: 'exchanges#deliver_matches'
+    get 'exchange/:id/send_reminder', to: 'exchanges#send_reminder'
   end
 
   resources :exchanges, only: %i[show index] do

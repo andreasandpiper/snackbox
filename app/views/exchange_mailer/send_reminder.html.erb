@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>SnackBox | Teladoc Health</h1>
+    <p>
+      Get excited, snack matching is happening on  <b><%= @exchange.start_date.strftime("%B %d, %Y") %></b>
+    </p>
+
+    <b>Please make sure your address and preferences are correct. If there is any incorrect information, follow this <%= link_to "link", @url, target: "_blank", rel: "nofollow" %>!</b>
+    <p><b>Name:</b> <%= @participant.full_name %>
+    <p><b>Address</b></p>
+    <p><%= @participant.address_1 %></p>
+    <% if @participant.address_2 %>
+      <p><%= @participant.address_2 %></p>
+    <% end %>
+    <p><%= @participant.city %>, <%= @participant.state %> <%= @participant.zipcode %></p>
+    <p><b>Preferences</b></p>
+    <% if @participant.preferences %>
+      <%= @participant.preferences %>
+    <% else %>
+      <p>None</p>
+    <% end %>
+    <br><br>
+    <p>Thanks for participating in SnackBox and happy snacking!</p>
+    <footer>
+      For any questions or concerns, email awayte@teladochealth.com
+    </footer>
+  </body>
+</html>
