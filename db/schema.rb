@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_22_001601) do
+ActiveRecord::Schema.define(version: 2021_01_26_005856) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 2021_01_22_001601) do
     t.string "details", null: false
     t.string "department", null: false
     t.boolean "is_matching_viewable", default: false, null: false
+    t.boolean "mailed_matches", default: false, null: false
   end
 
   create_table "participation_tokens", force: :cascade do |t|

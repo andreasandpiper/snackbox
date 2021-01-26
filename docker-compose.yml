@@ -20,3 +20,8 @@ services:
     environment:
       ADMIN_USERNAME: username
       ADMIN_PASSWORD: password
+  mailcatcher:
+    image: yappabe/mailcatcher
+    ports:
+      - "1025:1025"
+      - "1080:1080"

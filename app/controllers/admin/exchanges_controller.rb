@@ -51,8 +51,12 @@ module Admin
     end
 
     def deliver_matches
-      exchange = Exchange.find params[:exchange_id]
-      ExchangeMailer.with(exchange: exchange).send_matching.deliver_now
+      @exchange = Exchange.find params[:id]
+      ExchangeMailer.with(exchange: @exchange).send_matching.deliver_now
+      @exchange.update mailed_matches: true
+      flash[:notice] = "Successfully mailed out matches!"
+      redirect_to admin_exchange_url(@exchange)
+      rescue
     end
 
     private

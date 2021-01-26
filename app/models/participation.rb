@@ -13,4 +13,8 @@ class Participation < ApplicationRecord
 
   validates :user_id, presence: true,
                       uniqueness: { scope: :exchange, message: 'cannot sign up for the same exchange more than once.' }
+
+  def match
+    Participation.find match_participation_id
+  end
 end

@@ -2,7 +2,12 @@
 
 class ExchangeMailer < ApplicationMailer
   def send_matching
-    mail(to: params[:participation].user.email,
-         subject: 'SnackBox | Let the snacking begin! Checkout your snack match!')
+    @exchange = params[:exchange]
+    @exchange.matched_participants.each do |r|
+      @participant = r
+      @match = r.match
+      mail(to: @participant.user.email,
+           subject: 'SnackBox | Let the snacking begin! Checkout your snack match!').deliver
+    end
   end
 end

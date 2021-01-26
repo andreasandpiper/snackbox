@@ -4,21 +4,36 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>SnackBox</h1>
+    <h1>SnackBox | Teladoc Health</h1>
     <p>
       Matching is done! Time to go shopping for some local snacks!
     </p>
     <ul>
         <li>
-        You will have until the end date to ship your box. 
+        Please ship your box by <b><%= @exchange.end_date.strftime("%B %d, %Y") %></b>
         </li>
         <li>
             Make sure you read your snackees details to see if there are any food allergies.
         </li>
         <li>
-        You can be reimbursed up to $25 as well as shipping costs from Concur.
+        You can be reimbursed up to $25 USD worth of snacks and the shipping costs from Concur.
         </li>
     </ul>
+    <h2>Snack Match details:</h2>
+    <p><b>Name:</b> <%= @match.full_name %>
+    <p><b>Address</b></p>
+    <p><%= @match.address_1 %></p>
+    <% if @match.address_2 %>
+      <p><%= @match.address_2 %></p>
+    <% end %>
+    <p><%= @match.city %>, <%= @match.state %> <%= @match.zipcode %></p>
+    <p><b>Preferences</b></p>
+    <% if @match.preferences %>
+      <%= @match.preferences %>
+    <% else %>
+      <p>None</p>
+    <% end %>
+    <br><br>
     <p>Thanks for participating in SnackBox and happy snacking!</p>
     <footer>
       For any questions or concerns, email awayte@teladochealth.com

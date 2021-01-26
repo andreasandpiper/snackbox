@@ -12,10 +12,26 @@
     <%= button_to "Edit", edit_admin_exchange_path(@exchange), { :method => "get",  :class => "button is-primary m-1"} %>
     <%= button_to "Participant View", exchange_path(@exchange), { :method => "get",  :class => "button is-info m-1"} %>
     <%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-link m-1"} %>
-    <%= button_to "Match Participants", admin_path(@exchange), { :method => "get",  :class => "button m-1"} %>
-    <%= button_to "Email match info", "/admin/exchange/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1"} %>
+    
     </div>
     </div>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+  Only participants with valid checked will be matched. This is so we can verify each participant.
+  <p>Have matches already been sent out? <b><%= @exchange.mailed_matches ? "yes" : "no" %></b></p>
+  <%= button_to "Match Participants", admin_path(@exchange), { :method => "get",  :class => "button m-1"} %>
+  </div>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+  By clicking the button below, you will send am email to all participants who have matches. 
+  <%= button_to "Email match info", "/admin/exchange/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1"} %>
+  </div>
 </div>
 <br>
 <br>
