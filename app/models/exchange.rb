@@ -14,6 +14,10 @@ class Exchange < ApplicationRecord
     participation.joins(:user).order("email ASC")
   end
 
+  def teams_list
+    teams.split(",")
+  end
+
   def matched_participants
     participation.where("is_matched is ?", true)
   end

@@ -7,13 +7,13 @@
     <div class="field">
       <%= f.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "start_date", order: [:day, :month, :year]) %>
+        <%= date_select("exchange", "start_date", {order: [:day, :month, :year]}, {class: "select"}) %>
       </div>
     </div>
     <div class="field">
       <%= f.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "end_date", order: [:day, :month, :year]) %>
+        <%= date_select("exchange", "end_date", {order: [:day, :month, :year]}, {class: "select"}) %>
       </div>
     </div>
     <div class="field">
@@ -26,6 +26,12 @@
       <%= f.label :department, "Department", { :class => "label"} %>
       <div class="control">
       <%= f.text_field :department, { :class => "input", :required => true} %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :teams, "Teams (separate teams with commas)", { :class => "label"} %>
+      <div class="control">
+      <%= f.text_field :teams, { :class => "input", :required => true} %>
       </div>
     </div>
     <div class="field">

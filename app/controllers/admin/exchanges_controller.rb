@@ -68,7 +68,7 @@ module Admin
     private
 
     def exchange_params
-      params.require(:exchange).permit(:name, :country, :details, :department)
+      params.require(:exchange).permit(:name, :country, :details, :department, :teams)
     end
 
     def exchange_date_params
