@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   resources :exchanges, only: %i[show index] do
     resources :participations, only: %i[new edit create update destroy]
     get '/link', to: 'participations#edit_link'
+    get '/participations/:id/verify', to: 'participations#verify'
     post '/participations/:id/match_ready', to: 'participations#set_match_ready'
   end
 end

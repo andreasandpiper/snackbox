@@ -37,6 +37,8 @@ class ParticipationsController < ApplicationController
     @participation = @user.participation.new participation_params.merge(exchange_params)
     if @participation.valid?
       @participation.save
+      ParticipationMailer.with(participation: @participation,
+        exchange_id: @exchange.id).verify_participation.deliver_now
       flash[:notice] =
         "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}, in which you will get an email with your matchers information. In order to edit your preferences in the future, you will need to visit the home page to get a link to edit."
       render :edit
@@ -85,7 +87,17 @@ class ParticipationsController < ApplicationController
     participation = Participation.find params[:id]
     participation.update is_match_ready: ActiveModel::Type::Boolean.new.cast(!!params[:is_match_ready])
     flash[:notice] = "Successfully update match readieness for participant #{participation.id}"
-    redirect_to admin_exchange_url(participation.exchange)
+    redirect_to exchange_url(participation.exchange)
+  end
+
+  def verify
+    participation = Participation.find params[:id]
+    if participation.update is_match_ready: true
+      flash[:notice] = "Successfully verified email for #{participation.user[:email]}"
+    else
+      flash[:error] = "Not able to verify email for #{participation.user[:email]}. Please contact for assistance."
+    end
+    redirect_to exchange_url(participation.exchange)
   end
 
   private
