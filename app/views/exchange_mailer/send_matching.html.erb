@@ -2,13 +2,47 @@
 <html>
   <head>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <style>
+    * {
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    }
+    
+    a {
+    color: #17a2b8;
+    text-decoration:none;
+    }
+
+    h1 {
+      color: #331f65;
+    }
+
+    h4 {
+      color: #17a2b8;
+    }
+    </style>
   </head>
-  <body>
-    <h1>SnackBox | Teladoc Health</h1>
-    <p>
-      Matching is done! Time to go shopping for some local snacks!
-    </p>
-    <ul>
+  <body style="margin: 0; padding: 0;">
+  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
+    <tr>
+      <td style="padding: 20px 0 30px 0;">
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
+  <tr>
+    <td align="center" bgcolor="#4a4a4a" style="padding: 40px 0 30px 0;">
+      <h1 style="color: #ffffff">SnackBox</h1>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+        <tr>
+          <td style="color: #153643; sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
+          <h4>
+          Matching is done! Time to go shopping for some local snacks!
+        </h4>
+            <ul>
         <li>
         Please ship your box by <b><%= @exchange.end_date.strftime("%B %d, %Y") %></b>
         </li>
@@ -18,25 +52,60 @@
         <li>
         You can be reimbursed up to $25 USD worth of snacks and the shipping costs from Concur.
         </li>
+        <li>Since SnackBox is all about bringing us together, write a little note to brighten their day and let them know who you are and where you are from!</li>
     </ul>
-    <h2>Snack Match details:</h2>
-    <p><b>Name:</b> <%= @match.full_name %>
-    <p><b>Address</b></p>
-    <p><%= @match.address_1 %></p>
-    <% if @match.address_2 %>
-      <p><%= @match.address_2 %></p>
-    <% end %>
-    <p><%= @match.city %>, <%= @match.state %> <%= @match.zipcode %></p>
-    <p><b>Preferences</b></p>
-    <% if @match.preferences %>
-      <%= @match.preferences %>
-    <% else %>
-      <p>None</p>
-    <% end %>
-    <br><br>
-    <p>Thanks for participating in SnackBox and happy snacking!</p>
-    <footer>
-      For any questions or concerns, email awayte@teladochealth.com
-    </footer>
-  </body>
+          </td>
+        </tr>
+        <tr>
+          <td style="color: #331f65;">
+          <h2>Snack Match details:</h2>
+            <p><b>Name:</b> <%= @match.full_name %>
+            <p><b>Email:</b> <%= @match.user.email %>
+            <p><b>Address</b></p>
+            <p><%= @match.address_1 %></p>
+            <% if @match.address_2 %>
+              <p><%= @match.address_2 %></p>
+            <% end %>
+            <p><%= @match.city %>, <%= @match.state %> <%= @match.zipcode %></p>
+            <p><b>Preferences</b></p>
+            <% if @match.preferences.present? %>
+              <%= @match.preferences %>
+            <% else %>
+              <p>None</p>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <br>
+            <br>
+            <i>Be on the look out for YOUR snack box! When you receive your box, make sure to give a nice thank you! Here are some ideas:</i>
+            <br>
+            <br>
+            <ul>
+              <li>Write an email!</li>
+              <li>Send a message on Slack!</li>
+              <li>Post a photo and thank you message in #general Slack channel</li>
+            </ul>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+  <tr>
+    <td bgcolor="#331f65" style="padding: 30px 30px;">
+        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
+        <tr>
+          <td style="color: #ffffff; font-size: 14px;">
+            <p style="margin: 0;">Thanks for participating in SnackBox and happy snacking!<br/>
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+      </td>
+    </tr>
+  </table>
+</body>
 </html>

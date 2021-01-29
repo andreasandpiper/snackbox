@@ -7,7 +7,7 @@ class ExchangeMailer < ApplicationMailer
       @participant = r
       @match = r.match
       mail(to: @participant.user.email,
-           subject: 'SnackBox | Let the snacking begin! Checkout your snack match!').deliver
+           subject: 'SnackBox | Let the snacking begin! Here is your snack match!').deliver
     end
   end
 
