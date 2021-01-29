@@ -41,12 +41,8 @@ module Admin
       @exchange.participation.update_all is_matched: false, match_participation_id: nil
       matcher = ParticipationMatcher.new @exchange
       matcher.match
+      matcher.order_match unless matcher.complete
       @participation = @exchange.participants
-      render :show
-    rescue Exception
-      @exchange.reload
-      @participation = @exchange.participants
-      flash.now[:alert] = 'Something went wrong with matching.'
       render :show
     end
 
@@ -62,6 +58,14 @@ module Admin
       @exchange = Exchange.find params[:id]
       ExchangeMailer.with(exchange: @exchange).send_reminder.deliver_now
       flash[:notice] = "Successfully mailed out reminder!"
+      redirect_to admin_exchange_url(@exchange)
+    end
+
+    def set_exclude
+      @exchange = Exchange.find params[:id]
+      participation = Participation.find params[:participation_id]
+      participation.update exclude: ActiveModel::Type::Boolean.new.cast(!!params[:exclude])
+      flash[:notice] = "Successfully updated exclusion for participant #{participation.id}"
       redirect_to admin_exchange_url(@exchange)
     end
 

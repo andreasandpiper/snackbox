@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_26_221820) do
+ActiveRecord::Schema.define(version: 2021_01_28_232842) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -49,7 +49,8 @@ ActiveRecord::Schema.define(version: 2021_01_26_221820) do
     t.uuid "user_id"
     t.uuid "exchange_id"
     t.boolean "is_matched", default: false, null: false
-    t.boolean "is_match_ready", default: false, null: false
+    t.boolean "exclude", default: false, null: false
+    t.boolean "verified_email", default: false, null: false
     t.index ["exchange_id"], name: "index_participations_on_exchange_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end

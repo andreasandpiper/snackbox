@@ -1,3 +1,0 @@
-<%= form_for participation, url: "/exchanges/#{exchange.id}/participations/#{participation.id}/match_ready", html: { method: :post } do |f| %>
-    <%= check_box_tag(:is_match_ready, true, participation.is_match_ready, :onclick => "this.form.submit();") %>
-  <% end %> 

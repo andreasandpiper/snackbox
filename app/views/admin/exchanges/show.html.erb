@@ -22,7 +22,7 @@
   <div class="card-content">
   Only participants with valid checked will be matched. This is so we can verify each participant.
   <p>Have matches already been sent out? <b><%= @exchange.mailed_matches ? "yes" : "no" %></b></p>
-  <%= button_to "Match Participants", admin_path(@exchange), { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you want to rematch participants?" }} %>
+  <%= button_to "Match Participants", "/admin/exchanges/#{@exchange.id}/match", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you want to rematch participants?" }} %>
   </div>
 </div>
 <br>
@@ -30,7 +30,7 @@
 <div class="card">
   <div class="card-content">
   Send a reminder matching is happening soon!
-  <%= button_to "Send reminder", "/admin/exchange/#{@exchange.id}/send_reminder", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you are ready to send out a reminder?" }}%>
+  <%= button_to "Send reminder", "/admin/exchanges/#{@exchange.id}/send_reminder", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you are ready to send out a reminder?" }}%>
   </div>
 </div>
 <br>
@@ -38,7 +38,7 @@
 <div class="card">
   <div class="card-content">
   By clicking the button below, you will send a email to all participants who have matches. 
-  <%= button_to "Email match info", "/admin/exchange/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1", data: { confirm: "Are you sure you are ready to send out match info to all participants?" }} %>
+  <%= button_to "Email match info", "/admin/exchanges/#{@exchange.id}/deliver_matches", { :method => "get",  :class => "button is-danger is-outlined m-1", data: { confirm: "Are you sure you are ready to send out match info to all participants?" }} %>
   </div>
 </div>
 <br>
@@ -49,14 +49,14 @@
 <table class="table is-fullwidth is-striped">
   <thead>
     <tr>
-      <th>valid?</th>
-      <th>id</th>
-      <th>Name</th>
+      <th>Verified email?</th>
+      <th>Name/id</th>
       <th>Email</th>
       <th>Address</th>
       <th>Team</th>
       <th>Preferences</th>
-      <th>Match</th>
+      <th>Match email</th>
+      <th>Exclude?</th>
     </tr>
   </thead>
   <tbody>
@@ -64,15 +64,15 @@
       <% match = @participation.find { |p| p.id == e.match_participation_id} %>
         <tr>
             <td>
-              <%= render "set_match_ready", participation: e, exchange: @exchange %>
+              <%= e.verified_email %>
             </td>
-            <td><%= e.id %></td>
-            <td><%= e.full_name %></td>
+            <td><h3 class="has-text-weight-semibold"><%= e.full_name %></h3><br><span class="has-text-weight-light"><%= e.id %></span></td>
             <td><%= e.user.email %></td>
             <td><%= e.address_1 %> <%= e.address_2 %>, <%= e.city %>, <%= e.state %> <%= e.zipcode %> </td>
             <td><%= e.team %></td>
             <td><%= e.preferences %></td>
             <td><%= match && match.user.email %></td>
+            <td><%= render "exclude_checkbox", participation: e, exchange: @exchange %></td>
         </tr>
     <% end %>
   </tbody>

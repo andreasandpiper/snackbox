@@ -83,16 +83,9 @@ class ParticipationsController < ApplicationController
     end
   end
 
-  def set_match_ready
-    participation = Participation.find params[:id]
-    participation.update is_match_ready: ActiveModel::Type::Boolean.new.cast(!!params[:is_match_ready])
-    flash[:notice] = "Successfully update match readieness for participant #{participation.id}"
-    redirect_to exchange_url(participation.exchange)
-  end
-
   def verify
     participation = Participation.find params[:id]
-    if participation.update is_match_ready: true
+    if participation.update verified_email: true
       flash[:notice] = "Successfully verified email for #{participation.user[:email]}"
     else
       flash[:error] = "Not able to verify email for #{participation.user[:email]}. Please contact for assistance."

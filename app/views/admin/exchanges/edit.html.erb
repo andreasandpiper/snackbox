@@ -1,8 +1,3 @@
-<%= form_for @exchange, url: admin_exchange_path(@exchange), html: { method: :put } do |f| %>
-    <%= render "form_fields", f: f %>
-    <div class="buttons">
-    <%= f.submit "Update", { :class => "button is-link"} %>
-<% end %>
-<%= button_to "Back to exchanges", admin_exchanges_path, { :method => "get",  :class => "button is-primary"} %>
-</div>
-      
+<%= render partial: "form", locals: {label: "Update"} %>
+
+  

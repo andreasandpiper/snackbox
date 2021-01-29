@@ -23,6 +23,6 @@ class Exchange < ApplicationRecord
   end
 
   def match_ready_participants
-    participation.where('is_matched IS ? AND is_match_ready IS ?', false, true)
+    participation.where('verified_email IS ? AND exclude IS ?', true, false)
   end
 end

@@ -1,0 +1,3 @@
+<%= form_for participation, url: "/admin/exchanges/#{exchange.id}/participations/#{participation.id}/exclude", html: { method: :post } do |f| %>
+    <%= check_box_tag(:exclude, true, participation.exclude, :onclick => "this.form.submit();") %>
+<% end %>

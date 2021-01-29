@@ -1,4 +1,16 @@
-<div class="field">
+<% if @exchange.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@exchange.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+      <ul>
+      <% @exchange.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+<%= form_with(model: [:admin, @exchange], local: true) do |f| %>
+  <div class="field">
       <%= f.label :name, "Exchange Name", { :class => "label"} %>
       <div class="control">
       <%= f.text_field :name, { :class => "input", :required => true} %>
@@ -40,3 +52,6 @@
       <%= f.text_area :details, { :class => "input"} %>
       </div>
     </div>
+    <%= f.submit label, { :class => "button is-link is-light"} %>
+    <%= button_to "Back", admin_exchanges_path, { :method => "get",  :class => "button is-primary is-light"} %>
+  <% end %>
