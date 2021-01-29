@@ -1,0 +1,23 @@
+
+Get excited, snack matching is happening on
+
+<%= @exchange.start_date.strftime("%B %d, %Y") %>!
+Please make sure your address and preferences are correct. If there is
+any incorrect information, follow this <%= link_to "link", @url, target:
+"_blank", rel: "nofollow" %> to update!
+
+Name:
+<%= @participant.full_name %>
+Address
+<%= @participant.address_1 %>
+<% if @participant.address_2 %>
+<%= @participant.address_2 %>
+<% end %>
+<%= @participant.city %>, <%= @participant.state %> <%=
+@participant.zipcode %>
+Preferences
+
+<% if @participant.preferences.present? %> <%= @participant.preferences %>
+<% else %>
+None
+<% end %>

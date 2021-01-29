@@ -1,0 +1,30 @@
+Woo, you are <i>almost</i> signed up for SnackBox!
+        
+Verify your email by clicking this <%= link_to "link", @verify_url, target: "_blank", rel: "nofollow" %>
+Double check your mailing address
+        
+          Address
+          <%= @participant.address_1 %>
+          <% if @participant.address_2 %>
+          <%= @participant.address_2 %>
+          <% end %>
+            <%= @participant.city %>, <%= @participant.state %> <%=
+            @participant.zipcode %>
+
+Preferences
+          <% if @participant.preferences.present? %> <%=
+          @participant.preferences %> <% else %>
+None
+
+If there is any incorrect information, follow this <%= link_to "link", @edit_url, target: "_blank", rel: "nofollow" %> to update!
+
+I'm signed up, what now?
+      
+Matching will occur on
+<%= @participant.exchange.start_date.strftime("%B %d, %Y") %> in
+which will receive an email with your snack match's name, email, mailing
+address and dietary preferences.
+
+
+The email will also include the date in which you should ship your
+snackbox and other instructions.

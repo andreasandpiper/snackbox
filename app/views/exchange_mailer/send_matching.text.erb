@@ -1,0 +1,39 @@
+Matching is done! Time to go shopping for some local snacks!
+
+Please ship your box by
+
+<%= @exchange.end_date.strftime("%B %d, %Y") %>
+
+Make sure you read your snackees details to see if there are any food
+allergies.
+
+You can be reimbursed up to $25 USD worth of snacks and the shipping
+costs from Concur.
+
+Since SnackBox is all about bringing us together, write a little note to
+brighten their day and let them know who you are and where you are from!
+
+Snack Match details:
+Name: <%= @match.full_name %>
+Email: <%= @match.user.email %>
+Address
+<%= @match.address_1 %>
+<% if @match.address_2 %>
+<%= @match.address_2 %>
+<% end %>
+<%= @match.city %>, <%= @match.state %> <%= @match.zipcode %>
+Preferences
+<% if @match.preferences.present? %> <%= @match.preferences %> <% else %>
+None
+<% end %>
+
+Be on the look out for YOUR snack box! When you receive your box, make
+sure to give a nice thank you! Here are some ideas:
+
+
+Write an email!
+
+Send a message on Slack!
+
+Post a photo and thank you message in #general Slack channel
+
