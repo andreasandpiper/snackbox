@@ -88,7 +88,7 @@ class ParticipationsController < ApplicationController
     if participation.update verified_email: true
       flash[:notice] = "Successfully verified email for #{participation.user[:email]}"
     else
-      flash[:error] = "Not able to verify email for #{participation.user[:email]}. Please contact for assistance."
+      flash[:alert] = "Not able to verify email for #{participation.user[:email]}. Please contact for assistance."
     end
     redirect_to exchange_url(participation.exchange)
   end
@@ -98,8 +98,8 @@ class ParticipationsController < ApplicationController
   def check_valid_token
     valid_token = ParticipationToken.where("token = ? AND participation_id = ? AND expires_at >= ?", params[:token], params[:id], Time.now )
     unless valid_token.present?
-      flash[:error] = 'This link has expired. Please re-submit email address to get a new link.'
-      redirect_to exchanges_path
+      flash[:alert] = 'This link has expired. Please submit email address below to receive a new link.'
+      redirect_to exchange_path(Exchange.find params[:exchange_id])
     end
   end
 
