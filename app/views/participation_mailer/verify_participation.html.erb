@@ -1,81 +1,69 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
-    <style>
-    * {
-    margin: 0;
-    padding: 0;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    }
-    
-    a {
-    color: #17a2b8;
-    text-decoration:none;
-    }
-
-    h1 {
-      color: #331f65;
-    }
-    </style>
-  </head>
-  <body style="margin: 0; padding: 0;">
-  <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-    <tr>
-      <td style="padding: 20px 0 30px 0;">
-
-<table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse; border: 1px solid #cccccc;">
-  <tr>
-    <td align="center" bgcolor="#4a4a4a" style="padding: 40px 0 30px 0;">
-      <h1 style="color: #ffffff">SnackBox</h1>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#ffffff" style="padding: 40px 30px 40px 30px;">
-      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-        <tr>
-          <td style="color: #153643; font-family: Arial, sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
+<tr>
+  <td
+    style="
+      color: #153643;
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      line-height: 24px;
+      padding: 20px 0 30px 0;
+    "
+  >
+    <h2>Woo, you are <i>almost</i> signed up for SnackBox!</h2>
+    <br />
+    <br />
+    <ol>
+      <li>
+        <b>
+          Verify your email by clicking this
+          <span
+            ><%= link_to "link", @verify_url, target: "_blank", rel: "nofollow"
+            %></span
+          >
+        </b>
+      </li>
+      <li>
+        <b>Double check your mailing address</b>
+        <div style="margin-left: 15px">
+          <p><b>Address</b></p>
+          <p><%= @participant.address_1 %></p>
+          <% if @participant.address_2 %>
+          <p><%= @participant.address_2 %></p>
+          <% end %>
           <p>
-          Please verify your email to join the exchange by clicking this <%= link_to "link", @verify_url, target: "_blank", rel: "nofollow" %>!
-        </p>
-            <br><br>
-            Make sure your address and preferences are correct.
-            <br><br>
-            <p><b>Address</b></p>
-            <p><%= @participant.address_1 %></p>
-            <% if @participant.address_2 %>
-              <p><%= @participant.address_2 %></p>
-            <% end %>
-            <p><%= @participant.city %>, <%= @participant.state %> <%= @participant.zipcode %></p>
-            <br>
-            <p><b>Preferences</b></p>
-            <% if @participant.preferences.present? %>
-              <%= @participant.preferences %>
-            <% else %>
-              <p>None</p>
-            <% end %>
-            <br>
-            <br>
-            <b>If there is any incorrect information, follow this <%= link_to "link", @edit_url, target: "_blank", rel: "nofollow" %> to update! This link expires in 24 hours.</b>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-  <tr>
-    <td bgcolor="#331f65" style="padding: 30px 30px;">
-        <table border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse: collapse;">
-        <tr>
-          <td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 14px;">
-            <p style="margin: 0;">Thanks for participating in SnackBox and happy snacking!<br/>
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>
-</table>
-      </td>
-    </tr>
-  </table>
-</body>
-</html>
+            <%= @participant.city %>, <%= @participant.state %> <%=
+            @participant.zipcode %>
+          </p>
+          <br />
+          <p><b>Preferences</b></p>
+          <% if @participant.preferences.present? %> <%=
+          @participant.preferences %> <% else %>
+          <p>None</p>
+          <% end %>
+        </div>
+      </li>
+      <li>
+        <b>
+          If there is any incorrect information, follow this
+          <span
+            ><%= link_to "link", @edit_url, target: "_blank", rel: "nofollow"
+            %></span
+          >
+          to update!
+        </b>
+      </li>
+    </ol>
+    <br />
+    <br />
+    <h2>I'm signed up, what now?</h2>
+    <p>
+      Matching will occur on
+      <b><%= @participant.exchange.start_date.strftime("%B %d, %Y") %></b> in
+      which will receive an email with your snack match's name, email, mailing
+      address and dietary preferences.
+    </p>
+    <p>
+      The email will also include the date in which you should ship your
+      snackbox and other instructions.
+    </p>
+  </td>
+</tr>

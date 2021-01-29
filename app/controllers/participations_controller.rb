@@ -40,7 +40,7 @@ class ParticipationsController < ApplicationController
       ParticipationMailer.with(participation: @participation,
         exchange_id: @exchange.id).verify_participation.deliver_now
       flash[:notice] =
-        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Matching occurs on #{@exchange[:start_date]}, in which you will get an email with your matchers information. In order to edit your preferences in the future, you will need to visit the home page to get a link to edit."
+        "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Look for an email to verify your sign up!"
       render :edit
     else
       flash.now[:alert] = @participation.errors.full_messages.concat(@user.errors.full_messages).join(", ")
