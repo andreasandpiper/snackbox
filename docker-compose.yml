@@ -1,13 +1,9 @@
 version: '3.1'
 services:
-  db:
-    image: postgres
-    restart: always
-    volumes:
-      - ./tmp/db:/var/lib/postgresql/data
-    environment:
-      POSTGRES_PASSWORD: password
   web:
+    depends_on:
+      - "db"
+      - "redis"
     stdin_open: true
     tty: true
     build: .
@@ -17,13 +13,35 @@ services:
       - "3000:3000"
     depends_on:
       - db
-    environment:
-      ADMIN_USERNAME: username
-      ADMIN_PASSWORD: password
-      BASE_URL: http://localhost:3000
-      CONTACT_EMAIL: awayte@teladochealth.com
+      - sidekiq
+      - redis
   mailcatcher:
     image: yappabe/mailcatcher
     ports:
       - "1025:1025"
       - "1080:1080"
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./tmp/db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+  redis:
+    image: 'redis:5-alpine'
+    command: redis-server
+    ports: 
+      - "6379:6379"
+    volumes:
+      - "redis:/data"
+    hostname: redis
+  sidekiq:
+    build: .
+    depends_on:
+      - redis
+    volumes:
+      - .:/snackbox
+    command: bundle exec sidekiq -q default -q mailers
+volumes:
+  redis:
+  db:

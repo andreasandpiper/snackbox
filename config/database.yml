@@ -85,4 +85,4 @@ production:
   <<: *default
   database: snackbox_production
   username: snackbox
-  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  password: Rails.application.credentials.postgres_password

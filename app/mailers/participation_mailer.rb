@@ -3,15 +3,15 @@
 class ParticipationMailer < ApplicationMailer
   def edit_participation
     new_token = token(params[:participation].id)
-    @url = "#{ENV.fetch("BASE_URL")}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{new_token}"
+    @url = "#{Rails.application.credentials.base_url}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{new_token}"
     mail(to: params[:participation].user.email, subject: 'SnackBox | Link to edit details')
   end
 
   def verify_participation
     new_token = token(params[:participation].id)
     @participant = params[:participation]
-    @verify_url = "#{ENV.fetch("BASE_URL")}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/verify"
-    @edit_url = "#{ENV.fetch("BASE_URL")}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{new_token}"
+    @verify_url = "#{Rails.application.credentials.base_url}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/verify"
+    @edit_url = "#{Rails.application.credentials.base_url}/exchanges/#{params[:exchange_id]}/participations/#{params[:participation].id}/edit?token=#{new_token}"
     mail(to: params[:participation].user.email, subject: 'SnackBox | Verify your email')
   end
 

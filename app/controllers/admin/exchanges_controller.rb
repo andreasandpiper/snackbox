@@ -2,7 +2,7 @@
 
 module Admin
   class ExchangesController < ApplicationController
-    http_basic_authenticate_with name: ENV.fetch("ADMIN_USERNAME"), password: ENV.fetch("ADMIN_PASSWORD")
+    http_basic_authenticate_with name: Rails.application.credentials.admin_username, password: Rails.application.credentials.admin_password
 
     def index
       @exchanges = Exchange.all.most_current_first
@@ -48,7 +48,7 @@ module Admin
 
     def deliver_matches
       @exchange = Exchange.find params[:id]
-      ExchangeMailer.with(exchange: @exchange).send_matching.deliver_now
+      ExchangeMailer.with(exchange: @exchange).send_matching.deliver_later
       @exchange.update mailed_matches: true
       flash[:notice] = "Successfully mailed out matches!"
       redirect_to admin_exchange_url(@exchange)
@@ -56,7 +56,7 @@ module Admin
 
     def send_reminder
       @exchange = Exchange.find params[:id]
-      ExchangeMailer.with(exchange: @exchange).send_reminder.deliver_now
+      ExchangeMailer.with(exchange: @exchange).send_reminder.deliver_later
       flash[:notice] = "Successfully mailed out reminder!"
       redirect_to admin_exchange_url(@exchange)
     end
