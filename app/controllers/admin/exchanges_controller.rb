@@ -31,9 +31,9 @@ module Admin
     end
 
     def update
-      exchange = Exchange.find params[:id]
-      exchange.update! exchange_params.merge(exchange_date_params)
-      redirect_to admin_exchanges_path
+      @exchange = Exchange.find params[:id]
+      @exchange.update! exchange_params.merge(exchange_date_params)
+      redirect_to admin_exchange_url(@exchange)
     end
 
     def match
@@ -76,8 +76,8 @@ module Admin
     end
 
     def exchange_date_params
-      formated_end_date = format_date('start_date')
-      formated_start_date = format_date('end_date')
+      formated_start_date = format_date('start_date')
+      formated_end_date = format_date('end_date')
       { end_date: formated_end_date, start_date: formated_start_date }
     end
 

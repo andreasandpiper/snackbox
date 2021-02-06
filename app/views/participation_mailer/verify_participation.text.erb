@@ -15,6 +15,7 @@ Preferences
           <% if @participant.preferences.present? %> <%=
           @participant.preferences %> <% else %>
 None
+<% end %>
 
 If there is any incorrect information, follow this <%= link_to "link", @edit_url, target: "_blank", rel: "nofollow" %> to update!
 

@@ -107,7 +107,7 @@ GEM
     msgpack (1.4.2)
     mustermann (1.1.1)
       ruby2_keywords (~> 0.0.1)
-    nio4r (2.5.4)
+    nio4r (2.5.5)
     nokogiri (1.11.1)
       mini_portile2 (~> 2.5.0)
       racc (~> 1.4)
