@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ParticipationsController < ApplicationController
-  before_action :check_valid_token, only: %i[edit]
+  before_action :check_valid_token, only: %i[edit update destroy]
 
   def new
     @exchange = Exchange.find params[:exchange_id]
@@ -16,12 +16,14 @@ class ParticipationsController < ApplicationController
     @exchange = Exchange.find params[:exchange_id]
     @participation = @exchange.participation.find params[:id]
     @user = @participation.user
+    @token = params[:token]
   end
 
   def update
     @participation = Participation.find params[:id]
     @exchange = @participation.exchange
     @user = User.find_or_create_by email: params[:email].downcase.strip
+    @token = params[:token]
     if @participation.update participation_params.merge(exchange_params)
       flash.now[:notice] = "You've successfully updated your preferences!"
       render :edit
@@ -37,8 +39,9 @@ class ParticipationsController < ApplicationController
     @participation = @user.participation.new participation_params.merge(exchange_params)
     if @participation.valid?
       @participation.save
+      @token = @participation.generate_token
       ParticipationMailer.with(participation: @participation,
-        exchange_id: @exchange.id).verify_participation.deliver_now
+        exchange_id: @exchange.id, token: @token).verify_participation.deliver_now
       flash[:notice] =
         "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Look for an email to verify your sign up!"
       render :edit

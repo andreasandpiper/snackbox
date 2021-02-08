@@ -3,6 +3,7 @@
 <div class="card">
     <div class="card-content">
     <%= form_with(model: [@exchange, @participation], local: true) do |form| %>
+      <%= hidden_field_tag 'token', @token %>
         <div class="columns">
           <div class="column">
             <div class="field">
@@ -96,7 +97,7 @@
         <div class="buttons is-right">
           <% if label === "Update" %>
           <%= button_to "Remove from exchange", {:controller => :participations,
-            :action => 'destroy', :id => @participation.id }, { class: "button is-danger is-right", method: :delete} %>
+            :action => 'destroy', :id => @participation.id, :token => @token }, { class: "button is-danger is-right", method: :delete, data: { confirm: "Are you sure you want to be removed from exchange?" }} %>
         <% end %>
         </div>
 
