@@ -104,6 +104,9 @@ class ParticipationsController < ApplicationController
       flash[:alert] = 'This link has expired. Please submit email address below to receive a new link.'
       redirect_to exchange_path(Exchange.find params[:exchange_id])
     end
+  rescue
+    flash[:alert] = 'This link is invalid.'
+      redirect_to exchange_path(Exchange.find params[:exchange_id])
   end
 
   def participation_params
