@@ -13,12 +13,3 @@
  *= require_tree .
  *= require_self
  */
-
- .hero-text {
-     color: white;
-     text-decoration: none;
- }
-
- .hero-text:hover {
-    color: white;
-}
