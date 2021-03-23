@@ -15,12 +15,12 @@
 
 ## Debugging
 
-- `docker attach snackbox_rails_web_1` and add a `byebug` in the code to debug
+- `docker attach snackbox_web_1` and add a `byebug` in the code to debug
 - Use mailcatcher to check email content, if not already running `docker-compose up -d mailcatcher` and open `localhost:1080`
 
 ## Environment variables
 
-- For development, make changes to variables with `EDITOR=vim rails credentials:edit`
+- For development, make changes to variables with `EDITOR=vim rails credentials:edit --environment development`
 - For production, make changes to variables with `rails credentials:edit --environment production`
 
 ## Running rails commands in Docker
