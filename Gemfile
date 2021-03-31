@@ -10,7 +10,7 @@ gem 'webpacker', '4.3.0'
 gem 'bootsnap', '>= 1.4.2', require: false
 gem 'nokogiri'
 gem 'rake'
-gem 'sidekiq', '6.1.3'
+gem 'sidekiq', '6.2.0'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]

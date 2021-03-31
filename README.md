@@ -21,7 +21,7 @@
 ## Environment variables
 
 - For development, make changes to variables with `EDITOR=vim rails credentials:edit --environment development`
-- For production, make changes to variables with `rails credentials:edit --environment production`
+- For production, make changes to variables with `EDITOR=vim rails credentials:edit --environment production`
 
 ## Running rails commands in Docker
 

@@ -23,7 +23,6 @@ ActiveRecord::Schema.define(version: 2021_01_28_232842) do
     t.string "country", null: false
     t.string "details", null: false
     t.string "department", null: false
-    t.boolean "is_matching_viewable", default: false, null: false
     t.boolean "mailed_matches", default: false, null: false
     t.string "teams"
   end

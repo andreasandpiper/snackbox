@@ -5,21 +5,16 @@ services:
       - "db"
       - "redis"
     stdin_open: true
-    tty: true
     build: .
-    volumes:
-      - .:/snackbox
     ports:
       - "3000:3000"
     depends_on:
       - db
       - sidekiq
       - redis
-  mailcatcher:
-    image: yappabe/mailcatcher
-    ports:
-      - "1025:1025"
-      - "1080:1080"
+    environment: 
+      - POSTGRES_HOST=db
+      - POSTGRES_PORT=5432
   db:
     image: postgres
     restart: always
@@ -39,8 +34,6 @@ services:
     build: .
     depends_on:
       - redis
-    volumes:
-      - .:/snackbox
     command: bundle exec sidekiq -q default -q mailers
 volumes:
   redis:

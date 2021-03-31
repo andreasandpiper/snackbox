@@ -1,5 +1,5 @@
 {
-  "name": "snackbox_rails",
+  "name": "snackbox",
   "private": true,
   "dependencies": {
     "@rails/actioncable": "^6.0.0",
