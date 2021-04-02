@@ -2,24 +2,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
-  username: postgres
-  password: password
+  username: <%= ENV["POSTGRES_USERNAME"] || "postgres" %>
+  password: <%= ENV["POSTGRES_PASSWORD"] || "password" %>
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV.fetch("DATABASE_HOST") { "db" } %>
-  port: <%= ENV.fetch("DATABASE_PORT") { 5432 } %>
+  host: <%= ENV.fetch("POSTGRES_HOST") { "db" } %>
+  port: <%= ENV.fetch("POSTGRES_PORT") { 5432 } %>
 
 development:
   <<: *default
-  username: <%= ENV["DATABASE_USERNAME"] || "postgres" %>
-  password: <%= ENV["DATABASE_PASSWORD"] || "password" %>
-  database: snackbox_rails_development
+  database: snackbox_development
 
 test:
   <<: *default
-  database: snackbox_rails_test
+  database: snackbox_test
 
 production:
   <<: *default
   database: snackbox_production
-  username: <%= ENV["DATABASE_USERNAME"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
