@@ -2,7 +2,7 @@
 
 module Admin
   class ExchangesController < ApplicationController
-    http_basic_authenticate_with name: Rails.application.credentials.admin_username, password: Rails.application.credentials.admin_password
+    http_basic_authenticate_with name: Rails.application.credentials.admin_login_username, password: Rails.application.credentials.admin_login_password
 
     def index
       @exchanges = Exchange.all.most_current_first

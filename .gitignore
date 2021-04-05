@@ -35,7 +35,7 @@ vendor/bundle/
 yarn-debug.log*
 .yarn-integrity
 
-/config/credentials/production.key
 .env
 .DS_Store
-/config/credentials/development.key
+
+snackbox-keypair.pem
