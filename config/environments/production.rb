@@ -66,7 +66,7 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings= {
-    :address => ‘email-smtp.us-east-1.amazonaws.com‘,
+    :address => "email-smtp.us-east-1.amazonaws.com",
     :authentication => :login,
     :user_name => Rails.application.credentials.smtp_username,
     :password => Rails.application.credentials.smtp_password,

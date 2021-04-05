@@ -72,19 +72,12 @@ class ParticipationsController < ApplicationController
     if @user.present?
       participation = @user.participation.find_by exchange_id: params[:exchange_id]
       if participation
-        ParticipationMailer.with(participation: participation,
-                                  exchange_id: params[:exchange_id]).edit_participation.deliver_now
-        flash[:notice] = "Email sent to #{params[:email]}. The link will expire in 24 hours."
-        respond_to do |format|
-          format.js { render js: "window.location.href = '#{exchange_path(@exchange)}'" }
-        end
-        return
+        # ParticipationMailer.with(participation: participation,
+        #                           exchange_id: params[:exchange_id]).edit_participation.deliver_now
+        redirect_to exchange_path(@exchange), notice:  "Email sent to #{params[:email]}. The link will expire in 24 hours." and return 
       end
     end
-    flash[:alert] = 'You have not signed up for the exchange, fill out the form below to sign up!'
-    respond_to do |format|
-     format.js { render js: "window.location.href = '#{new_exchange_participation_path(@exchange)}?email=#{params[:email]}'" }
-    end
+    redirect_to new_exchange_participation_path(@exchange, email: params[:email]), alert: 'You have not signed up for the exchange, fill out the form below to sign up!'
   end
 
   def verify
