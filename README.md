@@ -10,8 +10,7 @@
 
 1. Build images `docker-compose build`
 2. Run containers `docker-compose up -d`
-3. Create db and run migration if not already `docker-compose run web rails db:create db:migrate`
-4. Head to `localhost:3000`
+3. Head to `localhost:8080`
 
 ## Debugging
 
@@ -20,7 +19,7 @@
 
 ## Environment variables
 
-- Make changes to variables with `EDITOR=vim rails credentials:edit`
+- Make changes to variables with `EDITOR=vim rails credentials:edit --environment {ENVIRONMENT}`
 
 ## Running rails commands in Docker
 

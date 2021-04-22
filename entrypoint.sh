@@ -1,7 +1,6 @@
 #!/bin/bash
 set -e
 
-# Precompile assets
 bundle exec rake assets:precompile
 
 # Wait for database to be ready
@@ -10,6 +9,7 @@ until nc -z -v -w30 $POSTGRES_HOST $POSTGRES_PORT; do
  sleep 1
 done
 echo "Postgres is up and running!"
+
 
 # If the database exists, migrate. Otherwise setup (create and migrate)
 bundle exec rake db:migrate 2>/dev/null || bundle exec rake db:create db:migrate

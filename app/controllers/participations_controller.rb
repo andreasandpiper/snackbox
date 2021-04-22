@@ -42,7 +42,7 @@ class ParticipationsController < ApplicationController
       @participation.save
       @token = @participation.generate_token
       ParticipationMailer.with(participation: @participation,
-        exchange_id: @exchange.id, token: @token).verify_participation.deliver_now
+        exchange_id: @exchange.id, token: @token).verify_participation.deliver_later
       flash[:notice] =
         "You've successfully signed up for '#{@exchange[:name].capitalize}' exchange! Look for an email to verify your sign up!"
       render :edit
@@ -50,6 +50,8 @@ class ParticipationsController < ApplicationController
       flash.now[:alert] = @participation.errors.full_messages.concat(@user.errors.full_messages).join(", ")
       render :new
     end
+    rescue StandardError => e
+      puts "Rescued: #{e.inspect}"
   end
 
   def destroy
@@ -72,8 +74,8 @@ class ParticipationsController < ApplicationController
     if @user.present?
       participation = @user.participation.find_by exchange_id: params[:exchange_id]
       if participation
-        # ParticipationMailer.with(participation: participation,
-        #                           exchange_id: params[:exchange_id]).edit_participation.deliver_now
+        ParticipationMailer.with(participation: participation,
+                                  exchange_id: params[:exchange_id]).edit_participation.deliver_later
         redirect_to exchange_path(@exchange), notice:  "Email sent to #{params[:email]}. The link will expire in 24 hours." and return 
       end
     end

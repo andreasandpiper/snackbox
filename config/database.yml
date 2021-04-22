@@ -4,7 +4,7 @@ default: &default
   encoding: unicode
   username: <%= ENV["POSTGRES_USERNAME"] || "postgres" %>
   password: <%= ENV["POSTGRES_PASSWORD"] || "password" %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV['RAILS_MAX_THREADS'] || Sidekiq.options[:concurrency] %>
   host: <%= ENV["POSTGRES_HOST"] || "db" %>
   port: <%= ENV["POSTGRES_PORT"] || 5432 %>
 

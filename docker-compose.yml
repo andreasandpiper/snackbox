@@ -1,22 +1,20 @@
-version: '3.1'
+version: "3.1"
 services:
   web:
-    depends_on:
-      - "db"
-      - "redis"
-    stdin_open: true
     build: .
     ports:
       - "8080:8080"
     depends_on:
       - db
-      - sidekiq
-      - redis
     environment:
       - POSTGRES_USERNAME=${POSTGRES_USERNAME}
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_HOST=${POSTGRES_HOST}
       - POSTGRES_PORT=${POSTGRES_PORT}
+      - RAILS_ENV=production
+      - PORT=8080
+      - REDIS_URL=redis://redis:6379/1
+    entrypoint: /usr/bin/entrypoint.sh
   db:
     image: postgres
     restart: always
@@ -25,9 +23,9 @@ services:
     environment:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
   redis:
-    image: 'redis:5-alpine'
+    image: "redis:6.2.1-alpine"
     command: redis-server
-    ports: 
+    ports:
       - "6379:6379"
     volumes:
       - "redis:/data"
@@ -36,7 +34,9 @@ services:
     build: .
     depends_on:
       - redis
-    command: bundle exec sidekiq -q default -q mailers
+    environment:
+      - REDIS_URL=redis://redis:6379/1
+    entrypoint: /usr/bin/sidekiq_entrypoint.sh
 volumes:
   redis:
   db:
