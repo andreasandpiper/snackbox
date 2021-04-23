@@ -63,14 +63,13 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "snackbox_rails_production"
 
   config.action_mailer.perform_caching = false
-
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
 	config.action_mailer.smtp_settings= {
     :address => "email-smtp.us-east-1.amazonaws.com",
-    :authentication => :login,
+    :authentication => :plain,
     :user_name => Rails.application.credentials.smtp_username,
     :password => Rails.application.credentials.smtp_password,
-    :enable_starttls_auto => true,
     :port => 465
 	}
 
