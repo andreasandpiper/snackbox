@@ -10,11 +10,10 @@
 </tr>
 <tr>
   <td style="color: #331f65">
-    <b
-      >Please make sure your address and preferences are correct. If there is
-      any incorrect information, follow this <%= link_to "link", @url, target:
-      "_blank", rel: "nofollow" %> to update!</b
-    >
+    <b>
+      Please make sure your address and preferences are correct. If there is
+      any incorrect information, follow this <%= link_to( "link", @url) %> to update!
+    </b>
     <br /><br />
     <p><b>Name:</b> <%= @participant.full_name %></p>
     <p><b>Address</b></p>
