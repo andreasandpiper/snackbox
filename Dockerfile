@@ -26,9 +26,7 @@ RUN yarn install --frozen-lockfile
 
 COPY . /snackbox
 
-COPY entrypoint.sh /usr/bin/
-COPY sidekiq_entrypoint.sh /usr/bin/
-RUN chmod +x /usr/bin/entrypoint.sh
-RUN chmod +x /usr/bin/sidekiq_entrypoint.sh
+COPY scripts /usr/bin/scripts
+RUN chmod -R +x /usr/bin/scripts
 
 EXPOSE 8080

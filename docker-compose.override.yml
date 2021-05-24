@@ -3,6 +3,9 @@ services:
   web:
     stdin_open: true
     tty: true
+    links:
+      - db
+      - webpacker
     volumes:
       - .:/snackbox
     environment:
@@ -15,3 +18,11 @@ services:
     ports:
       - "1025:1025"
       - "1080:1080"
+  webpacker:
+    build:
+      context: .
+    command: ["/usr/bin/scripts/start_webpack_dev.sh"]
+    volumes:
+      - .:/snackbox
+    ports:
+      - "3035:3035"

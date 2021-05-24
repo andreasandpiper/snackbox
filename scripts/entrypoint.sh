@@ -1,7 +1,10 @@
 #!/bin/bash
 set -e
 
-bundle exec rake assets:precompile
+if [ "$RAILS_ENV" = "production"  ]; then
+  bundle exec rake assets:clean 
+  bundle exec rake assets:precompile
+fi
 
 # Wait for database to be ready
 until nc -z -v -w30 $POSTGRES_HOST $POSTGRES_PORT; do

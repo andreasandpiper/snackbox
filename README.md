@@ -25,3 +25,8 @@
 
 - `docker-compose run ${container} ${command}`
 - For example, the rails console, need to run in the container `docker-compose run web rails c`
+
+## Run Production locally
+
+- add `SECRET_KEY_BASE` and `RAILS_MASTER_KEY` of the production key to docker-compose list of environment variables.
+- `docker-compose -f docker-compose.yml up -d --build`
