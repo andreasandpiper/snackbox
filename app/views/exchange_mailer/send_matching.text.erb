@@ -2,7 +2,7 @@ Matching is done! Time to go shopping for some local snacks!
 
 Please ship your box by
 
-<%= @exchange.ship_date.strftime("%B %d, %Y") %>
+<%= @participant.exchange.ship_date.strftime("%B %d, %Y") %>
 
 Make sure you read your snackees details to see if there are any food
 allergies.
@@ -14,16 +14,16 @@ Since SnackBox is all about bringing us together, write a little note to
 brighten their day and let them know who you are and where you are from!
 
 Snack Match details:
-Name: <%= @match.full_name %>
-Email: <%= @match.user.email %>
+Name: <%= @participant.match.full_name %>
+Email: <%= @participant.match.user.email %>
 Address
-<%= @match.address_1 %>
-<% if @match.address_2 %>
-<%= @match.address_2 %>
+<%= @participant.match.address_1 %>
+<% if @participant.match.address_2 %>
+<%= @participant.match.address_2 %>
 <% end %>
-<%= @match.city %>, <%= @match.state %> <%= @match.zipcode %>
+<%= @participant.match.city %>, <%= @participant.match.state %> <%= @participant.match.zipcode %>
 Preferences
-<% if @match.preferences.present? %> <%= @match.preferences %> <% else %>
+<% if @participant.match.preferences.present? %> <%= @participant.match.preferences %> <% else %>
 None
 <% end %>
 

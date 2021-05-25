@@ -23,8 +23,8 @@
 
 ## Running rails commands in Docker
 
-- `docker-compose run ${container} ${command}`
-- For example, the rails console, need to run in the container `docker-compose run web rails c`
+- `docker-compose exec ${container} ${command}`
+- For example, the rails console, need to run in the container `docker-compose exec web rails c`
 
 ## Run Production locally
 

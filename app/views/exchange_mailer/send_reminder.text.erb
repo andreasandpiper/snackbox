@@ -1,7 +1,14 @@
 
 Get excited, snack matching is happening on
 
-<%= @exchange.match_date.strftime("%B %d, %Y") %>!
+<%= @participant.exchange.match_date.strftime("%B %d, %Y") %>!
+
+<% if @participant.verified_email == false %>
+  <b>In order to participate, you need to verify your email. Please click this  <%= link_to( "link", @verify_url) %> to verify!</b>
+  <br>
+  <br>
+<% end %>
+
 Please make sure your address and preferences are correct. If there is
 any incorrect information, follow this <%= link_to("link", @url) %> to update!
 

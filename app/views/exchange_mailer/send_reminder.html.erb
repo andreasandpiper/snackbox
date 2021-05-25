@@ -4,12 +4,15 @@
   >
     <h4>
       Get excited, snack matching is happening on
-      <b><%= @exchange.match_date.strftime("%B %d, %Y") %></b>!
+      <b><%= @participant.exchange.match_date.strftime("%B %d, %Y") %></b>!
     </h4>
   </td>
 </tr>
 <tr>
   <td style="color: #331f65">
+    <% if @participant.verified_email == false %>
+      <p>In order to participate, you need to verify your email. Please click this  <%= link_to( "link", @verify_url) %> to verify!</p>
+    <% end %>
     <b>
       Please make sure your address and preferences are correct. If there is
       any incorrect information, follow this <%= link_to( "link", @url) %> to update!

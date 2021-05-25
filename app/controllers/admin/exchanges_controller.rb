@@ -48,7 +48,9 @@ module Admin
 
     def deliver_matches
       @exchange = Exchange.find params[:id]
-      ExchangeMailer.with(exchange: @exchange).send_matching.deliver_later
+      @exchange.matched_participants.each do |p|
+        ExchangeMailer.with(participation: p).send_matching.deliver_later
+      end
       @exchange.update mailed_matches: true
       flash[:notice] = "Successfully mailed out matches!"
       redirect_to admin_exchange_url(@exchange)
@@ -56,7 +58,9 @@ module Admin
 
     def send_reminder
       @exchange = Exchange.find params[:id]
-      ExchangeMailer.with(exchange: @exchange).send_reminder.deliver_later
+      @exchange.participation.each do |p|
+        ExchangeMailer.with(participation: p).send_reminder.deliver_later
+      end
       flash[:notice] = "Successfully mailed out reminder!"
       redirect_to admin_exchange_url(@exchange)
     end

@@ -6,7 +6,7 @@
     <ul>
       <li>
         Please ship your box by
-        <b><%= @exchange.ship_date.strftime("%B %d, %Y") %></b>
+        <b><%= @participant.exchange.ship_date.strftime("%B %d, %Y") %></b>
       </li>
       <li>
         Make sure you read your snackees details to see if there are any food
@@ -26,16 +26,16 @@
 <tr>
   <td style="color: #331f65">
     <h2>Snack Match details:</h2>
-    <p><b>Name:</b> <%= @match.full_name %></p>
-    <p><b>Email:</b> <%= @match.user.email %></p>
+    <p><b>Name:</b> <%= @participant.match.full_name %></p>
+    <p><b>Email:</b> <%= @participant.match.user.email %></p>
     <p><b>Address</b></p>
-    <p><%= @match.address_1 %></p>
-    <% if @match.address_2 %>
-    <p><%= @match.address_2 %></p>
+    <p><%= @participant.match.address_1 %></p>
+    <% if @participant.match.address_2 %>
+    <p><%= @participant.match.address_2 %></p>
     <% end %>
-    <p><%= @match.city %>, <%= @match.state %> <%= @match.zipcode %></p>
+    <p><%= @participant.match.city %>, <%= @participant.match.state %> <%= @participant.match.zipcode %></p>
     <p><b>Preferences</b></p>
-    <% if @match.preferences.present? %> <%= @match.preferences %> <% else %>
+    <% if @participant.match.preferences.present? %> <%= @participant.match.preferences %> <% else %>
     <p>None</p>
     <% end %>
   </td>
