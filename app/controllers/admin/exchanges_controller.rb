@@ -65,6 +65,15 @@ module Admin
       redirect_to admin_exchange_url(@exchange)
     end
 
+    def send_ship_reminder
+      @exchange = Exchange.find params[:id]
+      @exchange.participations_not_shipped.each do |p|
+        ExchangeMailer.with(participation: p).send_ship_reminder.deliver_later
+      end
+      flash[:notice] = "Successfully mailed out reminder!"
+      redirect_to admin_exchange_url(@exchange)
+    end
+
     def set_exclude
       @exchange = Exchange.find params[:id]
       participation = Participation.find params[:participation_id]

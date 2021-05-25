@@ -21,17 +21,26 @@
 <br>
 <div class="card">
   <div class="card-content">
-  Only participants with valid checked will be matched. This is so we can verify each participant.
-  <p>Have matches already been sent out? <b><%= @exchange.mailed_matches ? "yes" : "no" %></b></p>
-  <%= button_to "Match Participants", "/admin/exchanges/#{@exchange.id}/match", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you want to rematch participants?" }} %>
+  Send a reminder matching is happening soon!
+  <%= button_to "Send reminder", "/admin/exchanges/#{@exchange.id}/send_reminder", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you are ready to send out a reminder?" }}%>
   </div>
 </div>
 <br>
 <br>
 <div class="card">
   <div class="card-content">
-  Send a reminder matching is happening soon!
-  <%= button_to "Send reminder", "/admin/exchanges/#{@exchange.id}/send_reminder", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you are ready to send out a reminder?" }}%>
+  Send a reminder to ship snackbox!
+  <%= button_to "Send reminder", "/admin/exchanges/#{@exchange.id}/send_ship_reminder", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you are ready to send out a reminder?" }}%>
+  </div>
+</div>
+<br>
+<br>
+<div class="card">
+  <div class="card-content">
+  Send match info out to participants
+  <%= button_to "Match Participants", "/admin/exchanges/#{@exchange.id}/match", { :method => "get",  :class => "button m-1", data: { confirm: "Are you sure you want to rematch participants?" }} %>
+  <%= @exchange.mailed_matches ? "Matches have been emailed to everyone" : "Matches have not been emailed" %></b></p>
+  <i>Only participants who verified email will be matched</i>
   </div>
 </div>
 <br>
@@ -58,6 +67,7 @@
       <th>Team</th>
       <th>Preferences</th>
       <th>Match email</th>
+      <th>Shipped?</th>
       <th>Exclude?</th>
     </tr>
   </thead>
@@ -74,6 +84,7 @@
             <td><%= e.team %></td>
             <td><%= e.preferences %></td>
             <td><%= match && match.user.email %></td>
+            <td><%= e.shipped %></td>
             <td><%= render "exclude_checkbox", participation: e, exchange: @exchange %></td>
         </tr>
     <% end %>

@@ -92,6 +92,17 @@ class ParticipationsController < ApplicationController
     redirect_to exchange_url(participation.exchange)
   end
 
+  def ship
+    participation = Participation.find params[:id]
+    if participation.update shipped: true
+      flash[:notice] = "Thanks for shipping your gift!"
+      # send email to other person saying box was shipped
+    else
+      flash[:alert] = "Not able to save. Please try again or contact for assistance."
+    end
+    redirect_to exchange_url(participation.exchange)
+  end
+
   private
 
   def check_valid_token

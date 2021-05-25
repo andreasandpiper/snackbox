@@ -17,4 +17,14 @@ class ExchangeMailer < ApplicationMailer
     mail(to: @participant.user.email,
       subject: 'SnackBox | Matching is happening soon, make sure your information is correct!')
   end
+
+  def send_ship_reminder
+    @participant = params[:participation]
+    random_token = SecureRandom.alphanumeric(6)
+    ::ParticipationToken.create token: random_token, participation_id: @participant.id,
+                                expires_at: @participant.exchange.ship_date + 1.week
+    @url = "#{Rails.application.credentials.base_url}/exchanges/#{@participant.exchange.id}/participations/#{@participant.id}/ship?token=#{random_token}"
+    mail(to: @participant.user.email,
+          subject: "SnackBox | Ship your snackbox by #{@participant.exchange.ship_date.strftime("%B %d, %Y")}")
+  end
 end

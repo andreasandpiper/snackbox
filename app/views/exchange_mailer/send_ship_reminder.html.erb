@@ -1,0 +1,50 @@
+<tr>
+  <td>
+    <h4 style="color: #153643; sans-serif; font-size: 16px; line-height: 24px; padding: 20px 0 30px 0;">
+      Time to ship your snackbox!
+    </h4>
+    <br>
+    Our records indicate you have not shipped your snackbox. 
+  </td>
+</tr>
+<tr>
+  <td style="color: #331f65">
+    If you have already shipped it, click <%= link_to("here", @url) %> to update our records.
+    <br>
+    <br>
+    If not, here is your snackee information and ship your box by <b><%= @participant.exchange.ship_date.strftime("%B %d, %Y") %></b>
+    <br>
+    <br>
+    <h2>Snack Match details:</h2>
+    <p><b>Name:</b> <%= @participant.match.full_name %></p>
+    <p><b>Email:</b> <%= @participant.match.user.email %></p>
+    <p><b>Address</b></p>
+    <p><%= @participant.match.address_1 %></p>
+    <% if @participant.match.address_2 %>
+    <p><%= @participant.match.address_2 %></p>
+    <% end %>
+    <p><%= @participant.match.city %>, <%= @participant.match.state %> <%= @participant.match.zipcode %></p>
+    <p><b>Preferences</b></p>
+    <% if @participant.match.preferences.present? %> <%= @participant.match.preferences %> <% else %>
+    <p>None</p>
+    <% end %>
+    
+  </td>
+</tr>
+<tr>
+   <td>
+    <br />
+    <br />
+    <i
+      >Be on the look out for YOUR snack box! When you receive your box, make
+      sure to give a nice thank you! Here are some ideas:</i
+    >
+    <br />
+    <br />
+    <ul>
+      <li>Write an email!</li>
+      <li>Send a message on Slack!</li>
+      <li>Post a photo and thank you message in #general Slack channel</li>
+    </ul>
+  </td>
+</tr>

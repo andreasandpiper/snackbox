@@ -1,0 +1,32 @@
+Time to ship your snackbox!
+
+Our records indicate you have not shipped your snackbox. 
+
+If you have already shipped it, click <%= link_to("here", @url) %> to update our records.
+
+If not, here is your snackee information and ship your box by <b><%= @participant.exchange.ship_date.strftime("%B %d, %Y") %></b>
+
+Snack Match details:
+Name: <%= @participant.match.full_name %>
+Email: <%= @participant.match.user.email %>
+Address
+<%= @participant.match.address_1 %>
+<% if @participant.match.address_2 %>
+<%= @participant.match.address_2 %>
+<% end %>
+<%= @participant.match.city %>, <%= @participant.match.state %> <%= @participant.match.zipcode %>
+Preferences
+<% if @participant.match.preferences.present? %> <%= @participant.match.preferences %> <% else %>
+None
+<% end %>
+
+
+Be on the look out for YOUR snack box! When you receive your box, make
+sure to give a nice thank you! Here are some ideas:
+
+
+Write an email!
+
+Send a message on Slack!
+
+Post a photo and thank you message in #general Slack channel
