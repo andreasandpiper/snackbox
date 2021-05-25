@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_28_232842) do
+ActiveRecord::Schema.define(version: 2021_05_25_164149) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -18,13 +18,14 @@ ActiveRecord::Schema.define(version: 2021_01_28_232842) do
 
   create_table "exchanges", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
-    t.date "start_date", null: false
-    t.date "end_date", null: false
+    t.date "signup_date", null: false
+    t.date "ship_date", null: false
     t.string "country", null: false
     t.string "details", null: false
     t.string "department", null: false
     t.boolean "mailed_matches", default: false, null: false
     t.string "teams"
+    t.date "match_date", null: false
   end
 
   create_table "participation_tokens", force: :cascade do |t|

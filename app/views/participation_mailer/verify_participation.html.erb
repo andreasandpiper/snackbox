@@ -54,13 +54,12 @@
     <h2>I'm signed up, what now?</h2>
     <p>
       Matching will occur on
-      <b><%= @participant.exchange.start_date.strftime("%B %d, %Y") %></b> in
+      <b><%= @participant.exchange.match_date.strftime("%B %d, %Y") %></b> in
       which will receive an email with your snack match's name, email, mailing
       address and dietary preferences.
     </p>
     <p>
-      The email will also include the date in which you should ship your
-      snackbox and other instructions.
+      Once you get your match, have fun getting snacks and ship box by <%= @participant.exchange.ship_date.strftime("%B %d, %Y") %>. You can be reimbursed for up to $25 worth of snacks and shipping.
     </p>
   </td>
 </tr>

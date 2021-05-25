@@ -37,8 +37,8 @@
         </div>
     </section>
     <h4 class="title is-4">Exchange Title: <span class="has-text-primary"><%= @exchange.name %></h4>
-    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.start_date.strftime("%B %d, %Y") %></div>
-    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.end_date.strftime("%B %d, %Y") %></div>
+    <div class=""><span class="has-text-weight-bold">Matching date: </span><%= @exchange.signup_date.strftime("%B %d, %Y") %></div>
+    <div class=""><span class="has-text-weight-bold">Ship box by: </span><%= @exchange.ship_date.strftime("%B %d, %Y") %></div>
     <div class=""><span class="has-text-weight-bold">Country of exchange: </span><%= @exchange.country %></div>
     <div class=""><span class="has-text-weight-bold">Department of exchange: </span><%= @exchange.department %></div>
     <div class=""><span class="has-text-weight-bold">Details: </span><%= @exchange.details %></div>

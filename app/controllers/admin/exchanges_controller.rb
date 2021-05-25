@@ -76,9 +76,10 @@ module Admin
     end
 
     def exchange_date_params
-      formated_start_date = format_date('start_date')
-      formated_end_date = format_date('end_date')
-      { end_date: formated_end_date, start_date: formated_start_date }
+      formated_signup_date = format_date('signup_date')
+      formated_ship_date = format_date('ship_date')
+      formated_match_date = format_date('match_date')
+      { ship_date: formated_ship_date, signup_date: formated_signup_date, match_date: formated_match_date }
     end
 
     def format_date(key)

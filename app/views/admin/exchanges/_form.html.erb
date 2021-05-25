@@ -17,15 +17,21 @@
       </div>
     </div>
     <div class="field">
-      <%= f.label :name, "Start Date (mm-dd-yyyy)", { :class => "label"} %>
+      <%= f.label :name, "Signup Date", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "start_date", {order: [:day, :month, :year]}, {class: "select"}) %>
+        <%= date_select("exchange", "signup_date", {order: [:day, :month, :year]}, {class: "select"}) %>
       </div>
     </div>
     <div class="field">
-      <%= f.label :end_date, "End Date (mm-dd-yyyy)", { :class => "label"} %>
+      <%= f.label :ship_date, "Matching Date", { :class => "label"} %>
       <div class="control">
-        <%= date_select("exchange", "end_date", {order: [:day, :month, :year]}, {class: "select"}) %>
+        <%= date_select("exchange", "match_date", {order: [:day, :month, :year]}, {class: "select"}) %>
+      </div>
+    </div>
+    <div class="field">
+      <%= f.label :ship_date, "Ship Date", { :class => "label"} %>
+      <div class="control">
+        <%= date_select("exchange", "ship_date", {order: [:day, :month, :year]}, {class: "select"}) %>
       </div>
     </div>
     <div class="field">
