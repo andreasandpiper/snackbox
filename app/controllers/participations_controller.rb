@@ -96,7 +96,8 @@ class ParticipationsController < ApplicationController
     participation = Participation.find params[:id]
     if participation.update shipped: true
       flash[:notice] = "Thanks for shipping your gift!"
-      # send email to other person saying box was shipped
+      ParticipationMailer.with(snackbox_sender: participation.user,
+        snackbox_receiver: participation.match.user).ship_notification.deliver_later
     else
       flash[:alert] = "Not able to save. Please try again or contact for assistance."
     end
